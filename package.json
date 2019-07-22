@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/2044295/evankeeton/issues"
   },
-  "homepage": "https://evankeeton.herokuapp.com/"
+  "homepage": "https://evankeeton.herokuapp.com/",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
