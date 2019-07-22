@@ -11,6 +11,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+// Create the Static Path to Project Files
+app.use('/projects', express.static('Projects'));
+
 // Tell app to listen on appropriate PORT
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
