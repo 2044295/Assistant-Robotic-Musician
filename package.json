@@ -1,0 +1,26 @@
+{
+  "name": "evankeeton",
+  "version": "1.0.0",
+  "description": "My web portfolio for my engineering program at EHS",
+  "main": "index.js",
+  "scripts": {
+    "test": "node-dev index",
+    "start": "heroku local web"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2044295/evankeeton.git"
+  },
+  "keywords": [
+    "web",
+    "website",
+    "portfolio",
+    "engineering"
+  ],
+  "author": "Evan Keeton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2044295/evankeeton/issues"
+  },
+  "homepage": "https://evankeeton.herokuapp.com/"
+}
