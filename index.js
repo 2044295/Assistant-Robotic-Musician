@@ -72,7 +72,7 @@ app.get('/ls/*', (req, res) => {
 });
 
 // Create the Static Path to Project Files
-app.use('/projects', express.static('Projects'));
+app.use('/Projects', express.static('Projects'));
 
 // Tell app to listen on appropriate PORT
 app.listen(PORT, () => {
