@@ -8,11 +8,6 @@ const fs = require('file-system');
 const PORT = process.env.PORT || 8888; // check to see if PORT variable is defined, otherwise use 8888
 const app = express();
 
-// Define basic Hello World response
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
 // Define an "ls" method to list files in a directory
 app.get('/ls/*', (req, res) => {
   // turn request URL into useful Path
@@ -20,7 +15,7 @@ app.get('/ls/*', (req, res) => {
   lsURL = req.url.split(path.sep);
   lsURL = lsURL.slice(2, lsURL.length);
 
-  var lsPath = './';
+  var lsPath = './Public/';
   lsURL.forEach(partial => {
     if (partial !== '') lsPath += partial + '/';
   });
@@ -29,7 +24,7 @@ app.get('/ls/*', (req, res) => {
 
   // get list of files in requested directory
   var filesObj = {
-    url: lsPath.slice(1, lsPath.length),
+    url: lsPath.slice(8, lsPath.length),
     directories: ['.', '..'],
     files: []
   };
@@ -62,11 +57,8 @@ app.get('/ls/*', (req, res) => {
   });
 });
 
-// Create the Static Path to Project Files
-app.use('/Projects', express.static('Projects'));
-
-// Create the Static Path to the assets directory
-app.use('/assets', express.static('assets'));
+// Create the Static Path to Public, and make / redirect to /Public
+app.use('/', express.static('Public'));
 
 // Tell app to listen on appropriate PORT
 app.listen(PORT, () => {
