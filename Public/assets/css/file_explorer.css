@@ -1,0 +1,16 @@
+div {
+  margin: 5px;
+}
+
+div.mono {
+  font-family: "Menlo", "Courier New", monospace;
+}
+
+div.URL {
+  font-size: 20px;
+}
+
+div.dirs, div.files {
+  font-size: 16px;
+  padding-left: 2em;
+}
