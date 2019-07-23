@@ -27,15 +27,6 @@ app.get('/ls/*', (req, res) => {
 
   console.log(`Files list request for ${lsPath}`);
 
-  // ensure that Path is legal to request
-  if (lsPath.slice(0, 11) !== './Projects/' && lsPath.slice(0, 9) !== './Public/') {
-    console.log(`Error: Request for ls of ${lsPath} is illegal!`);
-    res.status(500)
-      .jsonp({error: `You do not have permission to acces this path!`})
-      .end();
-    return 1;
-  }
-
   // get list of files in requested directory
   var filesObj = {
     url: lsPath.slice(1, lsPath.length),
