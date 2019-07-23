@@ -22,7 +22,7 @@ app.get('/ls/*', (req, res) => {
 
   var lsPath = './';
   lsURL.forEach(partial => {
-    lsPath += partial + '/';
+    if (partial !== '') lsPath += partial + '/';
   });
 
   console.log(`Files list request for ${lsPath}`);
