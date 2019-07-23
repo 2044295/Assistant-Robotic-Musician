@@ -74,6 +74,9 @@ app.get('/ls/*', (req, res) => {
 // Create the Static Path to Project Files
 app.use('/Projects', express.static('Projects'));
 
+// Create the Static Path to the assets directory
+app.use('/assets', express.static('assets'));
+
 // Tell app to listen on appropriate PORT
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

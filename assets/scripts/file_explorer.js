@@ -46,7 +46,7 @@ function setProperties(lsRes, title, url, dirs, files) {
   });
 }
 
-var lsRes = JSON.parse(ls('/Projects/18-19/'));
+var lsRes = JSON.parse(ls(window.location.pathname));
 
 console.log(lsRes);
 
