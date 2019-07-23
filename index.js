@@ -39,7 +39,7 @@ app.get('/ls/*', (req, res) => {
   // get list of files in requested directory
   var filesObj = {
     url: lsPath.slice(1, lsPath.length),
-    directories: [],
+    directories: ['.', '..'],
     files: []
   };
 
