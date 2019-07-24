@@ -5,28 +5,28 @@ const path = require('path');
 const fs = require('file-system');
 
 // Define PORT & create app
-const PORT = process.env.PORT || 8888; // check to see if PORT variable is defined, otherwise use 8888
+const PORT = process.env.PORT || 8888; // set PORT to 8888 if not env variable
 const app = express();
 
 // Define an "ls" method to list files in a directory
 app.get('/ls/*', (req, res) => {
   // turn request URL into useful Path
-  var lsURL;
+  let lsURL;
   lsURL = req.url.split(path.sep);
   lsURL = lsURL.slice(2, lsURL.length);
 
-  var lsPath = './Public/';
-  lsURL.forEach(partial => {
+  let lsPath = './Public/';
+  lsURL.forEach((partial) => {
     if (partial !== '') lsPath += partial + '/';
   });
 
   console.log(`Files list request for ${lsPath}`);
 
   // get list of files in requested directory
-  var filesObj = {
+  let filesObj = {
     url: lsPath.slice(8, lsPath.length),
     directories: ['.', '..'],
-    files: []
+    files: [],
   };
 
   fs.readdir(lsPath, (err, dir) => {
@@ -38,8 +38,8 @@ app.get('/ls/*', (req, res) => {
     }
 
     // processing files
-    dir.forEach(file => {
-      var relative = path.join(lsPath, file);
+    dir.forEach((file) => {
+      let relative = path.join(lsPath, file);
       if (fs.lstatSync(relative).isDirectory()) {
         filesObj.directories.push(file);
       } else {
@@ -50,8 +50,8 @@ app.get('/ls/*', (req, res) => {
     // send out found information
     console.log(filesObj);
     res.status(200)
-      .jsonp(filesObj)
-      .end();
+        .jsonp(filesObj)
+        .end();
 
     return 0;
   });
