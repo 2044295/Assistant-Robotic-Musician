@@ -4,7 +4,7 @@
   "description": "My web portfolio for my engineering program at EHS",
   "main": "index.js",
   "scripts": {
-    "test": "node-dev index",
+    "test": "eslint index.js && node-dev index",
     "start": "heroku local web"
   },
   "repository": {
@@ -24,6 +24,7 @@
   },
   "homepage": "https://evankeeton.herokuapp.com/",
   "dependencies": {
+    "eslint-config-google": "^0.13.0",
     "express": "^4.17.1",
     "file-system": "^2.2.2",
     "path": "^0.12.7"
