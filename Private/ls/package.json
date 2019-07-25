@@ -1,0 +1,19 @@
+{
+  "name": "ls",
+  "version": "1.0.0",
+  "description": "A function to handle 'ls' requests of my site",
+  "main": "ls.js",
+  "scripts": {
+    "test": "node-dev ls"
+  },
+  "keywords": [
+    "ls",
+    "file-system"
+  ],
+  "author": "Evan Keeton",
+  "license": "ISC",
+  "dependencies": {
+    "file-system": "^2.2.2",
+    "path": "^0.12.7"
+  }
+}
