@@ -53,6 +53,8 @@ app.get('/ls/*', (req, res) => {
         .jsonp(filesObj)
         .end();
 
+    console.log();
+
     return 0;
   });
 });
