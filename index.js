@@ -5,20 +5,24 @@ const express = require('express');
 
 // my modules
 const ls = require('ls');
+const respond = require('respond');
 
 // Define PORT & create app
 const PORT = process.env.PORT || 8888; // set PORT to 8888 if not env variable
 const app = express();
 
-// Define an "ls" method to list files in a directory
-app.get('/ls/*', (req, res) => {
-  ls(req, res);
-});
+app.get('/*', (req, res) => {
+  console.log(`Request for ${req.url}`);
 
-// Create the Static Path to Public, and make / redirect to /Public
-app.use('/', express.static('Public'));
+  if (req.url.slice(0, 4) == '/ls/') {
+    ls(req, res); // if request is an "ls" request, respond accordingly
+  } else {
+    respond(req, res); // else it is a real request, respond accordingly
+  }
+});
 
 // Tell app to listen on appropriate PORT
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
+  console.log();
 });
