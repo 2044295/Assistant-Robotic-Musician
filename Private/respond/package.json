@@ -1,0 +1,18 @@
+{
+  "name": "respond",
+  "version": "1.0.0",
+  "description": "A function to handle regular requests of my site",
+  "main": "respond.js",
+  "scripts": {
+    "test": "node-dev respond"
+  },
+  "keywords": [
+    "response"
+  ],
+  "author": "Evan Keeton",
+  "license": "ISC",
+  "dependencies": {
+    "file-system": "^2.2.2",
+    "path": "^0.12.7"
+  }
+}
