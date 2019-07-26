@@ -44,7 +44,7 @@ function ls(req, res) {
 
     // get list of files in requested directory
     let filesObj = {
-      url: lsPath.slice(6, lsPath.length),
+      url: path.join(lsPath.slice(6, lsPath.length), '/'),
       directories: ['.', '..'],
       files: [],
     };
