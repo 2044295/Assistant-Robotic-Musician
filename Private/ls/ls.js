@@ -9,6 +9,7 @@ const fs = require('file-system');
  *
  * @param{http.ClientRequest} req The URL requested
  * @param{http.ServerResponse} res The response object to write to
+ * @return{int} Returns status code - 0 if no errors, 1 if path does not exist
  *
  */
 function ls(req, res) {
@@ -27,6 +28,10 @@ function ls(req, res) {
       res.status(500)
           .jsonp({error: err})
           .end();
+
+      console.log(`File or directory ${lsPath} does not exist!`);
+      console.log();
+      return 1;
     }
 
     // if no error but PATH is to file, get parent directory
@@ -71,6 +76,8 @@ function ls(req, res) {
       console.log();
     });
   });
+
+  return 0;
 }
 
 module.exports = ls;
