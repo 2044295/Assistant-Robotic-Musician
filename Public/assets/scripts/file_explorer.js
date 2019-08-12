@@ -56,7 +56,7 @@ function setProperties(lsRes, title, url, dirs, files) {
   url.appendChild(URLlink);
 
   lsRes.directories.forEach((dir) => {
-    dirname = dir + '/';
+    let dirname = dir + '/';
     let dirLink = document.createElement('a');
     dirLink.href = new URL(lsRes.url + dirname, window.location.origin);
     dirLink.innerText = dirname;
