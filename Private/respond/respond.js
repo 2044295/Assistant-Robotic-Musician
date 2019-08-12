@@ -37,7 +37,7 @@ function respond(req, res) {
       fs.readFile(index, 'utf-8', (err, data) => {
         // if error, index.html does not exist - use file_explorer.html
         if (err) {
-          index = 'Public/assets/html/file_explorer.html'
+          index = 'Public/assets/html/file_explorer.html';
           console.log(`Switching to ${index}`);
           res.status(200)
               .type('html')
@@ -53,7 +53,7 @@ function respond(req, res) {
       });
     } else if (stats.isFile()) {
       fs.readFile(relative, 'utf-8', (err, data) => {
-        type = relative.split('.').reverse()[0];
+        let type = relative.split('.').reverse()[0];
         res.status(200)
             .type(type)
             .end(data);
