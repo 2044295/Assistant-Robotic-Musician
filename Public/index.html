@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Evan Keeton | STEM Portfolio</title>
-    <link rel="shortcut icon" href="/favicon.ico"/>
-    <style>
-      .full-page {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        padding: 0px;
-        margin: 0px;
-        border: 0px;
-      }
-    </style>
-  </head>
-  <body class="full-page">
-    <iframe src="/science-and-engineering-academy" class="full-page"></iframe>
-  </body>
-</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  $(function(){
+    var includes = $('[data-include]');
+    jQuery.each(includes, function(){
+      var file = $(this).data('include');
+      console.log(`Requesting ${file}`);
+      $(this).load(file);
+    });
+  });
+</script>
+
+<div data-include="/science-and-engineering-academy/index.html"></div>
