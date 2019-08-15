@@ -52,7 +52,7 @@ function respond(req, res) {
         console.log();
       });
     } else if (stats.isFile()) {
-      fs.readFile(relative, 'utf-8', (err, data) => {
+      fs.readFile(relative, (err, data) => {
         let type = relative.split('.').reverse()[0];
         res.status(200)
             .type(type)
