@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Science and Engineering Academy</title>
+    <link rel="stylesheet" href="/assets/css/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="/assets/css/index_style.css">
+    <link rel="icon" type="image/png" href="/favicon.ico"/>
+  </head>
+  <body class="w3-light-grey w3-content main-body" style="max-width:1600px">
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-bar-block w3-white w3-animate-left w3-text-grey w3-collapse w3-top w3-center" style="z-index:3;width:300px;font-weight:bold" id="mySidebar"><br>
+      <div class="w3-padding-64">
+        <h3 class="w3-center"><b>STEM Portfolio</b></h3>
+        <h5 class="w3-center">Evan Keeton</h5>
+      </div>
+      <a href="javascript:void(0)" onclick="SidebarToggle()" class="w3-bar-item w3-button w3-padding w3-hide-large">CLOSE</a>
+      <a href="/Pages/science-and-engineering-academy/" class="w3-bar-item w3-button">Science &amp; Engineering Academy</a>
+      <a href="/Pages/all-about-me/" class="w3-bar-item w3-button">All About Me</a>
+      <a href="/Pages/stem-1/" class="w3-bar-item w3-button">STEM 1: Intro to Engineering</a>
+      <div id="STEM-2">
+        <button onclick="Stem2Toggle()" class="w3-bar-item w3-button">STEM 2: Engineering &amp; Graphics</button>
+        <div style="display: none; font-size: 12px;" id="stem-2-dropdown">
+          <a href="/Pages/stem-2/MP1/" class="w3-bar-item w3-button">STEM 2: Marking Period 1</a>
+          <a href="/Pages/stem-2/MP2/" class="w3-bar-item w3-button">STEM 2: Marking Period 2</a>
+          <a href="/Pages/stem-2/MP3/" class="w3-bar-item w3-button">STEM 2: Marking Period 3</a>
+          <a href="/Pages/stem-2/MP4/" class="w3-bar-item w3-button">STEM 2: Marking Period 4</a>
+        </div>
+      </div>
+      <!--<a href="/Pages/stem-3/" onclick="SidebarToggle()" class="w3-bar-item w3-button">STEM 2: Foo Bar</a>-->
+    </nav>
+
+    <!-- Top menu on small screens -->
+    <header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
+      <span class="w3-left w3-padding">STEM Portfolio</span>
+      <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+    </header>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="SidebarToggle()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main w3-white main-body" style="margin-left:300px;">
+      <!-- !PAGE CONTENT HERE! -->
+
+      <!-- Giving Credit where Credit is Due -->
+      <div class="w3-black w3-center w3-padding-24">
+        Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a>
+      </div>
+
+      <!-- Footer -->
+      <footer class="w3-container w3-padding-32 w3-grey">
+        <div class="w3-row-padding">
+          <div class="w3-half">
+            <h3>INFO</h3>
+            <p>
+              Evan Keeton is a rising junior in Edison High School's STEM
+              program. He is a combination academic/artist who could go on all
+              day about his interests: mathematics, physics, dance, music,
+              writing, programming, game design, etc.
+
+              <br />
+              <br />
+
+              Email:
+              <a href="mailto:2044295@edison.k12.nj.us">
+                2044295@edison.k12.nj.us
+              </a>
+            </p>
+          </div>
+
+          <div class="w3-half">
+            <h3>SOCIAL</h3>
+            <div class="w3-half">
+              <ul class="w3-ul">
+                <a href="https://github.com/evan-evone">
+                  <li class="w3-padding-16 w3-hover-black">
+                    <img src="https://octodex.github.com/images/trekkie.png"
+                      class="w3-left w3-margin-right" style="width:50px">
+                    <span class="w3-large">GitHub</span><br>
+                    <span>evan-evone</span>
+                  </li>
+                </a>
+                <a href="https://www.instagram.com/evan_evone/">
+                  <li class="w3-padding-16 w3-hover-black">
+                    <img src="https://instagram.com/static/images/ico/apple-touch-icon-76x76-precomposed.png/4272e394f5ad.png"
+                      class="w3-left w3-margin-right" style="width:50px">
+                    <span class="w3-large">Instagrarm</span><br>
+                    <span>evan_evone</span>
+                  </li>
+                </a>
+              </ul>
+            </div>
+            <div class="w3-half">
+              <ul class="w3-ul">
+                <a href="https://github.com/2044295">
+                  <li class="w3-padding-16 w3-hover-black">
+                    <img src="https://octodex.github.com/images/Professortocat_v2.png"
+                      class="w3-left w3-margin-right" style="width:50px">
+                    <span class="w3-large">GitHub</span><br>
+                    <span>2044295</span>
+                  </li>
+                </a>
+                <a href="https://music.apple.com/profile/evan_evone">
+                  <li class="w3-padding-16 w3-hover-black">
+                    <img src="https://support.apple.com/content/dam/edam/applecare/images/en_US/applemusic/featured-content-music-ios-icon_2x.png"
+                      class="w3-left w3-margin-right" style="width:50px">
+                    <span class="w3-large">Apple Music</span><br>
+                    <span>evan_evone</span>
+                  </li>
+                </a>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="/assets/scripts/w3.js">
+    </script>
+  </body>
+
+</html>

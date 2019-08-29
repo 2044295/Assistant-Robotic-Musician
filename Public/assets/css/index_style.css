@@ -1,0 +1,38 @@
+body, h1, h2, h3, h4, h5 {
+  font-family: "Raleway", sans-serif;
+}
+
+.w3-third img {
+  margin-bottom: -6px; opacity: 0.8; cursor: pointer;
+}
+
+.w3-third img:hover {
+  opacity: 1
+}
+
+/* My Stuff */
+.main-body {
+  align: center;
+  position: absolute;
+  top: 0;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+hr {
+  background-color: black;
+  opacity: 100%;
+  height: 1px;
+  width: 60%;
+  margin: 2em auto;
+}
+iframe.pdf {
+  width: 100%;
+  height: 500px;
+}
+img {
+  image-orientation: from-image;
+}
+nav {
+  border-right: 3px solid #f1f1f1;
+}

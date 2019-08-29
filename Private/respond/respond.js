@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('file-system');
+const makeHTML = require('./makeHTML.js');
 
 /**
  *
@@ -33,18 +34,18 @@ function respond(req, res) {
       let index = path.join(relative, 'index.html');
       console.log(`Checking for ${index}`);
 
-      fs.readFile(index, (err, data) => {
+      fs.readFile(index, 'utf-8', (err, data) => {
         // if error, index.html does not exist - use file_explorer.html
         if (err) {
           index = 'Public/assets/html/file_explorer.html';
           console.log(`Switching to ${index}`);
           res.status(200)
               .type('html')
-              .end(fs.readFileSync(index));
+              .end(fs.readFileSync(index, 'utf-8'));
         } else {
           res.status(200)
               .type('html')
-              .end(data);
+              .end(makeHTML('Public/assets/html/index_include.html', data));
         }
 
         console.log(`Served ${index}`);
