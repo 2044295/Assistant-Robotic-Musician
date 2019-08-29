@@ -1,12 +1,23 @@
 // Script to open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("myOverlay").style.display = "block";
+function SidebarToggle() {
+  mySidebar = document.getElementById("mySidebar")
+  myOverlay = document.getElementById("myOverlay")
+  if ((mySidebar.style.display === "block") || (myOverlay.style.display = "block")) {
+    mySidebar.style.display = "none";
+    myOverlay.style.display = "none";
+  } else {
+    mySidebar.style.display = "block";
+    myOverlay.style.display = "block";
+  }
 }
 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("myOverlay").style.display = "none";
+function Stem2Toggle() {
+  let dropdown = document.getElementById("stem-2-dropdown")
+  if (dropdown.style.display === "block") {
+    dropdown.style.display = "none"
+  } else {
+    dropdown.style.display = "block"
+  }
 }
 
 // Modal Image Gallery
