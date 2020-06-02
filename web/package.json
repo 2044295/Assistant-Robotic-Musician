@@ -1,7 +1,7 @@
 {
-  "name": "evankeeton",
+  "name": "Assistant-Robotic-Musician",
   "version": "1.0.0",
-  "description": "My web portfolio for my engineering program at EHS",
+  "description": "The online presence of the Assistant Robotic Musician",
   "main": "index.js",
   "scripts": {
     "test": "./eslint.sh && node-dev index",
