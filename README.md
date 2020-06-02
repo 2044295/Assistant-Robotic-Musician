@@ -39,3 +39,8 @@ the ARM, and the code that deploys the ARM's webpage:
 
 ### Webpage
 <https://assistant-robotic-musician.herokuapp.com>
+
+##### Deployment
+```
+git subtree push --prefix web heroku master
+```
