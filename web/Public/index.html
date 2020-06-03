@@ -1,11 +1,35 @@
-<div style="text-align: center; align: center;">
+<div id="content" style="text-align: center; align: center;">
   <h1> Assistant Robotic Musician (ARM)</h1>
   <h3>A Senior Capstone Project by Evan Keeton and Saketh Sitaram</h3>
-  <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQQRhEZx1KL3Ob_jSy2cfq6M8TszxBINv6C-5a2akFWa_euJssRNpEsyo63aw6Dplv1vgtumFhcjLje/embed?start=true&loop=true&delayms=3000"
-    frameborder="0" width="850" height="478" allowfullscreen="true"
+  <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTpov0QgXjnm21K3eQsW89qZ8mnbL39bKhET4sov40WlbQuUksXx4nGgRfjANy1RLmkimrx6-Mvd4ZN/embed?start=true&loop=true&delayms=3000"
+    frameborder="0" width="95%" height="100" allowfullscreen="true" id="presentation"
     mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
   <br /><br />
   <iframe src="https://docs.google.com/document/u/1/d/e/2PACX-1vQRo9i-7iH66aXB9OM6erXwtmJwGcW0c5zFK6VRUKVGY1YvfJHityUYPxXDwhDYQKqSvQlYs9O-lyOU/pub"
-    width="850" height="900" allowfullscreen="true"
+    width="95%" height="100" allowfullscreen="true" id="mission"
     mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+  <script type="text/javascript">
+    console.log('Hello world!')
+    function adjustSize () {
+      console.log('Attempting to adjust size...')
+
+      let content = document.getElementById('content')
+      let width = content.clientWidth * 0.95
+
+      let height_aspectratio = (width / 16) * 9
+      let height_presentation = height_aspectratio + 29
+      let height_mission = (width / 95) * 100
+
+      document.getElementById('presentation').height = height_presentation
+      // document.getElementById('video').height = height_aspectratio
+      document.getElementById('mission').height = height_mission
+
+      console.log('Size adjusted!')
+    }
+
+    adjustSize()
+
+    window.addEventListener("resize", adjustSize);
+  </script>
 </div>
