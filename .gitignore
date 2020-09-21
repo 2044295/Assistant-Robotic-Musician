@@ -87,5 +87,6 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
-# Test Files
+# Test & Development Files
 *.foo.*
+Icon?
