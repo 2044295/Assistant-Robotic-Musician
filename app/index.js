@@ -69,6 +69,7 @@ app.get('/*', (req, res) => {
       res.status(200)
          .type(type)
          .end(data);
+      console.log(`Successfully served file ${relative}`)
     });
   });
 });
