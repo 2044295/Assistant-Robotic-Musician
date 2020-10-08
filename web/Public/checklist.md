@@ -1,7 +1,9 @@
 # ARM: Website Checklist
 
 ### General Requirements
-- **README** More detailed website-working breakdown
+- [ ] **README** More detailed website-working breakdown
+- [ ] **INDEX_INCLUDE** Pick a different, more fitting theme
+- [ ] **INDEX_INCLUDE** Add headers and footers with important links and info
 
 - [x] Mission Statement
     - [x] Problem Statement
