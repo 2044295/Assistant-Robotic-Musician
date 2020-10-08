@@ -1,6 +1,16 @@
 <div id="content" style="text-align: center; align: center;">
   <h1> Assistant Robotic Musician (ARM)</h1>
   <h3>A Senior Capstone Project by Evan Keeton and Saketh Sitaram</h3>
+
+  <hr />
+  <h4>Mission Statement</h4>
+  <iframe src="https://docs.google.com/document/u/1/d/e/2PACX-1vQRo9i-7iH66aXB9OM6erXwtmJwGcW0c5zFK6VRUKVGY1YvfJHityUYPxXDwhDYQKqSvQlYs9O-lyOU/pub"
+    width="95%" height="100" allowfullscreen="true" id="mission"
+    mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+  <br /><br />
+
+  <hr />
+  <h4>Initial Project Proposal</h4>
   <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTpov0QgXjnm21K3eQsW89qZ8mnbL39bKhET4sov40WlbQuUksXx4nGgRfjANy1RLmkimrx6-Mvd4ZN/embed?start=true&loop=true&delayms=3000"
     frameborder="0" width="95%" height="100" allowfullscreen="true" id="presentation"
     mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
@@ -9,9 +19,12 @@
     frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
     id="video" allowfullscreen></iframe>
   <br /><br />
-  <iframe src="https://docs.google.com/document/u/1/d/e/2PACX-1vQRo9i-7iH66aXB9OM6erXwtmJwGcW0c5zFK6VRUKVGY1YvfJHityUYPxXDwhDYQKqSvQlYs9O-lyOU/pub"
-    width="95%" height="100" allowfullscreen="true" id="mission"
+  <hr />
+  <h4>Project Management Log</h4>
+  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSI3gHoo2YjkuyLFulsBMybP5KkWK0yzMxtb2iOvbRqRxmsuG8GSHUNmf-Q2hpmspiWYcOCb_VO7xh4/pubhtml?widget=true&amp;headers=false"
+    width="95%" height="100" allowfullscreen="true" id="management"
     mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+  <br /><br />
 
   <script type="text/javascript">
     console.log('Hello world!')
@@ -24,10 +37,12 @@
       let height_aspectratio = (width / 16) * 9
       let height_presentation = height_aspectratio + 29
       let height_mission = (width / 95) * 100
+      let height_management = height_mission
 
       document.getElementById('presentation').height = height_presentation
       document.getElementById('video').height = height_aspectratio
       document.getElementById('mission').height = height_mission
+      document.getElementById('management').height = height_management
 
       console.log('Size adjusted!')
     }
