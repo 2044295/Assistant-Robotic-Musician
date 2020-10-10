@@ -1,0 +1,90 @@
+<div id="content" style="text-align: center; align: center;">
+  <h1>Project Gallery</h1>
+  <h2>A visual archive of our project's development</h2>
+  <hr />
+  <div id="Photo Update" style="width: 75%; margin: auto;">
+    <img  id="Photo"
+          style="width: 100%; border: 5px solid #000; border-radius: 5px"></img>
+    <p    id="Caption">PLACEHOLDER</p>
+  </div>
+  <hr />
+  <iframe id="Presentation Update"></iframe>
+  <br /><br />
+  <hr />
+
+  <script type="text/javascript">
+    let photoIndex = 0;
+    let presentIndex = 0;
+
+    // A function for controlling the displayed Photo Update
+    function photoUpdate(i) {
+      photoIndex = i;
+
+      console.log(`Setting Photo Update to: Update ${photoIndex}`);
+      console.log(`Now displaying Photo ${photoIndex}...`);
+
+      let dates = [
+        "2020-09-29.gif"
+      ];
+
+      let descriptions = [
+        "29 September 2020: A simple text-based application for serving HTML.\n"
+        + "Our first tangible product, to be used in front-end development.",
+      ];
+
+      let date = dates[photoIndex];
+      let text = descriptions[photoIndex];
+
+      document.getElementById(`Photo`).src = `/Gallery/${date}`;
+      document.getElementById(`Photo`).alt = text;
+      document.getElementById(`Caption`).innerText = text;
+      console.log(`Successfully displayed Photo ${photoIndex}!`);
+    }
+
+    // And now, functions for controlling the displayed Presentation PDF
+    function presentationResize() {
+      console.log(`Adjusting size of Presentation ${presentIndex}...`);
+
+      let content = document.getElementById('content');
+      let update = document.getElementById('Presentation Update');
+
+      let width = content.clientWidth * 0.75;
+      let height = (width / 16) * 9;
+
+      update.width = width;
+      update.height = height;
+
+      console.log(`Presentation size set!`);
+    }
+
+    function presentationUpdate(i) {
+      presentIndex = i;
+
+      console.log(`Setting Presentation Update to: Update ${presentIndex}`);
+      console.log(`Now displaying Presentation ${presentIndex}...`);
+
+      let updates = [
+        "Update1-Sep2020.pdf"
+      ];
+
+      if (presentIndex >= updates.length) {
+        console.error(`ERROR! NO PRESENTATION AT INDEX ${presentIndex}`);
+        presentationUpdate(0);
+      } else {
+        document.getElementById('Presentation Update').src =
+          "/Gallery/" + updates[presentIndex];
+        console.log(`Successfully displayed Presentation ${presentIndex}!`)
+      }
+    }
+
+    // Running everything automatically, with defaults when the page is opened
+    photoUpdate(photoIndex);
+    presentationUpdate(presentIndex);
+    presentationResize();
+
+    // An event listener to manually adjust the size of the iframe
+    window.addEventListener("resize", () => {
+      presentationResize(document.getElementById('Presentation Update'));
+    });
+  </script>
+</div>
