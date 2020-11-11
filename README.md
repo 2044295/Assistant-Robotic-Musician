@@ -34,7 +34,39 @@ the ARM, and the code that deploys the ARM's webpage:
 05. [Webpage](#webpage)
 
 ### Scripts
+All technical scripts and files are stored in the `app` subdirectory of this
+repository and should be developed in the `app` branch. There are two parts to
+this subdirectory: `main` and `workshop`.
 
+##### `main`
+The `main` part of the `app` is composed of `scripts/index.js`, `scripts/HTML/`,
+and any relevant NodeJS files (`package.json`, `package-lock.json`, etc.). This
+portion represents the functional part of the app: the ElectronJS packaging, the
+User Interface, and any connected technical scripts. This portion of the
+subdirectory should be seen as the "official" presentation, or the "face" of the
+app; of course, it too will undergo development, but it is not experimental in
+the way the workshop is.
+
+At the moment, the functional app consists of: a stupidly basic HTML server.
+
+<!--Use this space to add details about development of `main`-->
+
+##### `workshop`
+The `workshop` part of the `app` is contained entirely in `scripts/workshop/`.
+It is the technical, experimental part of the app. Any new components should
+start their development in `workshop`, only graduating to `main` when they have
+been thoroughly tested and prepared for implementation.
+
+Every script in `workshop` should contain a block comment explaining the
+script's purpose, current knowledge about the experiment, current successes and
+problems, and any other relevant information. These scripts include:
+
+01. `01_NodePy`: A Python3 and a NodeJS pair for using Python within the app
+02. Other experiments to start:
+    - Sheet Music Markup Language (`SMML`) & displaying SMML
+    - Python audio processing
+
+<!--Use this space to add details about development of `app`-->
 
 ### Webpage
 <https://assistant-robotic-musician.herokuapp.com>
