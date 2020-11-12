@@ -2,10 +2,10 @@
 
 ### Website Design To-Add
 - [ ] **README** More detailed website-working breakdown
-- [ ] **INDEX_INCLUDE** Maybe pick a different, more fitting theme?
+- [x] **INDEX_INCLUDE** Maybe pick a different, more fitting theme?
 - [ ] **INDEX_INCLUDE** Headers and footers with important links and info
-- [ ] **GALLERY** Photo/Presentation Selector
-    - [ ] It would be fun to have a transition as part of the function
+- [ ] **HOMEPAGE** Shrink sections or somehow make sectioning different (so
+      that the page isn't quite so needlessly overwhelming)
 
 ### General Requirements
 - [x] Mission Statement
@@ -18,11 +18,14 @@
 
 ### October Update
 - [x] In- and Out-of-school Mentors
-- [ ] Project Flowchart (to be added later, when due)
+- [x] Project Flowchart (to be added later, when due)
+    - STIL NEEDS TO MATCH COLOR SCHEME
 - [x] Senior Year Presentation Update I
 
 ### November Update
 - [ ] Extensive R&I
+- [ ] **GALLERY** Photo/Presentation Selector (to complement new presentation)
+    - [ ] It would be fun to have a transition as part of the function
 
 ### Final Updates
 - [ ] Essential Learnings
