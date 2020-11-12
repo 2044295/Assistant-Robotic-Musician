@@ -1,0 +1,26 @@
+{
+  "name": "assistant-robotic-musician-app",
+  "version": "0.0.0",
+  "description": "An engineering project (specifically, a Senior Capstone Design Project) that aims to seamlessly and responsively turns the pages of the digital sheet music, contained in its library, as a musician performs.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node-dev index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2044295/Assistant-Robotic-Musician.git"
+  },
+  "author": "Evan Keeton, Saketh Sitaram",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2044295/Assistant-Robotic-Musician/issues"
+  },
+  "homepage": "https://github.com/2044295/Assistant-Robotic-Musician#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "file-system": "^2.2.2",
+    "path": "^0.12.7",
+    "python-shell": "^2.0.2"
+  }
+}
