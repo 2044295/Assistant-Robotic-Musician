@@ -62,6 +62,13 @@ script's purpose, current knowledge about the experiment, current successes and
 problems, and any other relevant information. These scripts include:
 
 01. `01_NodePy`: A Python3 and a NodeJS pair for using Python within the app
+    - Demonstrates a variety of functions, from running python one-liners, to
+      super basic text-based output from a script, to full-blown input/output
+    - Still missing: JSON Output example, (?) continuous stdin/stdout/stderr
+    - Numerous examples, each in their own code block, of having the apps
+      interact in different ways---primarily, NodeJS feeding data to Python
+    - Essential learning: Embedding Python is not difficult at all, we basically
+      just need to treat the script as if it's a function that we feed data
 02. Other experiments to start:
     - Sheet Music Markup Language (`SMML`) & displaying SMML
     - Python audio processing
