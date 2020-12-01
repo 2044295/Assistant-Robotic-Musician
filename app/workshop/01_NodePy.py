@@ -5,6 +5,7 @@
 
 import sys
 import argparse
+import json
 
 """"""
 """Setting up argparse: https://docs.python.org/3/library/argparse.html"""
@@ -32,8 +33,17 @@ parser.add_argument('-n', '--n-arg', action='store', nargs='+',
 parser.add_argument('--manipulate', action='store', nargs=1, default='',
                     type=str, help='sample text manipulation: splitting by `.`')
 
+# Adding a JSON flag to active JSON Output
+parser.add_argument('--json', action='store_true',
+                    help='activate the JSON demo')
+
 # And Lastly, Parsing the Args - Except the Script Name, Obviously
 argv = parser.parse_args(sys.argv[1:])
+
+if argv.json:
+    argv.no_basic = True
+    argv.sample = False
+    argv.arguments = False
 
 """"""
 # BASIC TEXT: With no arguments, output a few demonstrative lines
@@ -59,3 +69,14 @@ if argv.arguments:
         argv.two_arg))
     print('n-arg Argument: {}'.format(argv.n_arg))
     print('Manipulation: {}'.format(argv.manipulate[0].split('.')))
+
+# JSON: Sample JSON Output
+if argv.json:
+    sample_json_dic = {
+        'int': 420,
+        'float': 1.618,
+        'string': "hello world",
+        'list': [420, 1.618, "hello world"],
+        # 'function': lambda x: x + 5, - fails
+    }
+    print(json.dumps(sample_json_dic))

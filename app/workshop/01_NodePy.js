@@ -94,8 +94,15 @@ PythonShell.run('01_NodePy.py', options, (err, res) => {
 });
 
 // DEMO 6: "JSON", because maybe what we have to do is print entirely in JSON?
-console.log('[JSON] is currently out of service');
-console.log();
+PythonShell.run('01_NodePy.py', {args: ['--json'], mode: 'json'}, (err, res) => {
+  if (err) { throw err; }
+  console.log('[JSON] Running with simple flags: 01_NodePy.py --json');
+  console.log("- The `mode: 'json'` option causes PythonShell to try to");
+  console.log("  parse all printed output as JSON - so Python must output");
+  console.log("  only JSON (see the Python Example + python.json for details)");
+  console.log('-', res);
+  console.log();
+});
 
 // Perhaps something with more options - show the default options?
 // IF THERE'S TIME: Experiment more with stdin/stdout
