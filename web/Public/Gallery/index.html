@@ -1,17 +1,20 @@
 <div id="content" style="text-align: center; align: center;">
-  <hr />
   <h1>Project Gallery</h1>
   <h2>A visual archive of our project's development</h2>
-  <hr />
+  <div id="Selector">
+    <button type="button" name="September" class="w3-light-grey w3-button"
+      onclick="button(0)">September 2020</button>
+    <button type="button" name="November" class="w3-light-grey w3-button"
+      onclick="button(1)">November 2020</button>
+  </div>
+  <br />
   <div id="Photo Update" style="width: 75%; margin: auto;">
     <img  id="Photo"
           style="width: 100%; border: 5px solid #000; border-radius: 5px"></img>
     <p    id="Caption">PLACEHOLDER</p>
   </div>
-  <hr />
   <iframe id="Presentation Update"></iframe>
   <br /><br />
-  <hr />
 
   <script type="text/javascript">
     let photoIndex = 0;
@@ -25,12 +28,15 @@
       console.log(`Now displaying Photo ${photoIndex}...`);
 
       let dates = [
-        "2020-09-29.gif"
+        "2020-09-29.gif",
+        "2020-11-19.png"
       ];
 
       let descriptions = [
         "29 September 2020: A simple text-based application for serving HTML.\n"
         + "Our first tangible product, to be used in front-end development.",
+        "19 November 2020: The output of an experimental script that uses\n"
+        + "PythonShell to run Python in NodeJS (for computations)."
       ];
 
       let date = dates[photoIndex];
@@ -65,7 +71,8 @@
       console.log(`Now displaying Presentation ${presentIndex}...`);
 
       let updates = [
-        "Update1-Sep2020.pdf"
+        "Update1-Sep2020.pdf",
+        "Update2-Nov2020.pdf"
       ];
 
       if (presentIndex >= updates.length) {
@@ -76,6 +83,11 @@
           "/Gallery/" + updates[presentIndex];
         console.log(`Successfully displayed Presentation ${presentIndex}!`)
       }
+    }
+
+    function button(i) {
+      photoUpdate(i);
+      presentationUpdate(i);
     }
 
     // Running everything automatically, with defaults when the page is opened

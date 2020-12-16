@@ -23,9 +23,17 @@
 - [x] Senior Year Presentation Update I
 
 ### November Update
-- [ ] Extensive R&I
-- [ ] **GALLERY** Photo/Presentation Selector (to complement new presentation)
+- [x] Extensive R&I
+- [x] **GALLERY** Photo/Presentation Selector (to complement new presentation)
     - [ ] It would be fun to have a transition as part of the function
+
+### December Update
+- [x] Minor style updates (more aesthetically pleasing)
+    - [ ] Include Fullscreen Image on Click
+- [ ] Extensive R&D (especially with respect to Python)
+    - [x] Include preliminary Python R&D (.wav, opening and reading files)
+    - [ ] Include advanced Python R&D (live audio input + FFT)
+- [ ] Gallery Updates
 
 ### Final Updates
 - [ ] Essential Learnings
