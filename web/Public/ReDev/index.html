@@ -1,10 +1,10 @@
 <div id="content" style="text-align: center; align: center;">
   <h1>Research and Development</h1>
-  <h2>The details that built the project</h2>
 
-  <div id="1-materials">
-    <h3>1. Materials</h3>
-    <div id="materials-list" style="margin: auto; width: 50%">
+  <div id="concept" style="overflow: auto; padding: 2em 0;">
+    <h2>The Concept</h2>
+    <div id="materials" class="w3-third" style="margin: auto;">
+      <h3>Materials</h3>
       <p>
         <br />Text Editor (i.e. Atom, Visual Studio)
         <br />Command Line; Bash &amp; Git
@@ -13,9 +13,71 @@
         <br />NodeJS &amp; Electron
       </p>
     </div>
-    <br /><br />
-    <h3>2. Functionality Flowchart</h3>
-    <img  style="width: 75%; border: 5px solid black; border-radius: 5px"
-          src="/ReDev/2020-10-15_AppFlowchart.png"></img>
+    <div id="functionality" class="w3-third">
+      <img  style="width: 95%; min-width: 15em; max-width: 25em;
+                  border: 5px solid black; border-radius: 5px"
+            src="/ReDev/2020-10-15_AppFlowchart.png" alt="ARM Functionality">
+      </img>
+    </div>
+    <div id="packages" class="w3-third" style="margin: auto;">
+      <h3>Additional Packages</h3>
+      <p>
+        <br />[NodeJS] <code>Python-Shell</code>
+        <br />[Python] <code>sys</code>, <code>argparse</code>, &amp;
+              <code>json</code>
+        <br />[Python] <code>wave</code> &amp; <code>audioop</code>
+        <br />[Python] <code>numpy</code> (for <code>fft</code>)
+      </p>
+    </div>
+  </div>
+  <div id="python" style="overflow: auto; padding: 2em 0;">
+    <h2>The Tasks</h2>
+    <div id="coding-tasks" class="w3-half">
+      <h3>NodeJS: Python-Shell</h3>
+      <p>
+        <code>Python-Shell</code> provides an API that allows NodeJS to run
+        Python script within the app, either by running strings or by running a
+        separate file. The ARM will require continuous cross-communication
+        between the app and the Python computations, therefore requiring
+        extensive knowledge of the <code>Python-Shell</code> API and the various
+        modes of data exchange, including regular printing, JSON exchange,
+        argument data, and stdin/stdout.<br />
+        Research into <code>Python-Shell</code> was conducted in a "workshop"
+        file containing various experiments, including basic input/output,
+        data exchange via argument, and advanced JSON-based communication. This
+        "workshop" experiment does not currently support direct stdin/stdout
+        data exchange, a limitation which the program must work around in order
+        to support a continuous data stream of Python feedback.
+      </p>
+      <h3>Python: SMML Audio Processing</h3>
+      <p>
+        <a href="https://github.com/2044295/Assistant-Robotic-Musician/blob/app/app/workshop/02_SMML%20-%20Documentation.md">
+        Sheet Music Markup Language (SMML)</a> is an <code>HTML</code>-inspired
+        language for encoding sheet music at the intersection of human-readable
+        and machine-readable. In order to process a given SMML file into useful
+        feedback, the Python program must process live audio and match that
+        audio to various objects in the SMML.<br />
+        The first part of that task requires the use of a variety of packages,
+        namely <code>wave</code>, <code>audioop</code>, and <code>numpy</code>.
+        Programming the audio-interpreting function requires a deal of expertise
+        in these packages, such as in opening and reading <code>.wav</code>
+        files and reading that binary data as useful "frames", and in
+        identifying the present frequencies using <code>numpy.fft</code>. An FFT
+        (a Fast Fourier Transformation) is an algorithm for extracting
+        frequencies from an audio fragment.<br />
+        Experiments so far have touched only on the first of those tasks:
+        understanding the process of reading audio data from files. The program
+        still must develop functions for reading and processing continuous input
+        (as of that from a live source) and for using an FFT; after these
+        experiments are complete, the next task will be extracting musical
+        patterns and matching them to SMML objects.
+      </p>
+    </div>
+    <div id="coding-images" class="w3-half">
+      <img  style="width: 100%; min-width: 15em; max-width: 25em;
+                  border: 5px solid black; border-radius: 5px"
+            src="/Gallery/2020-11-19.png" alt="Sample Code Experiment Output">
+      </img>
+    </div>
   </div>
 </div>
