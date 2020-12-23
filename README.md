@@ -57,16 +57,47 @@ It is the technical, experimental part of the app. Any new components should
 start their development in `workshop`, only graduating to `main` when they have
 been thoroughly tested and prepared for implementation.
 
-Every script in `workshop` should contain a block comment explaining the
+Every script or file in `workshop` should contain a block comment explaining the
 script's purpose, current knowledge about the experiment, current successes and
-problems, and any other relevant information. These scripts include:
-
-01. `01_NodePy`: A Python3 and a NodeJS pair for using Python within the app
-02. Other experiments to start:
-    - Sheet Music Markup Language (`SMML`) & displaying SMML
-    - Python audio processing
+problems, and any other relevant information. These file include:
 
 <!--Use this space to add details about development of `app`-->
+
+01. `01_NodePy`: A Python3 and a NodeJS pair for using Python within the app
+    - Demonstrates a variety of functions, from running python one-liners, to
+      simple text-based input/output from a script, to JSON data transmission
+    - Still missing: continuous stdin/stdout/stderr
+    - Numerous examples, each in their own code block, of having the apps
+      interact in different ways---primarily, NodeJS feeding data to Python
+    - Essential learning: Embedding Python is not difficult at all, we basically
+      just need to treat the script as if it's a function that we feed data
+        - Especially Useful: Using JSON for data exchange between the two
+02. `02_SMML`: The definitive standard for Sheet Music Markup Language
+    - Includes both the documentation, as well as the original brainstorming
+    - Extension of `HTML`, adding a few new tags and functions
+    - Intended to, eventually, integrate
+03. `03_smmlAudio`: A collection of increasingly-advanced Python/Audio tests
+    - Opening and closing a `.wav` file through various means
+    - Reading a `.wav` file, as a whole and a segments ("frames")
+    - Next task: Reading from live input as it comes in
+    - Next task: Implementing the `FFT` algorithm for note detection
+    - For reading and writing: <https://docs.python.org/3/library/wave.html>
+    - For microphone input: [pyALSAAUDIO - StackOverflow][StackOverflow Mic]
+    - For processing data: <https://docs.python.org/3/library/audioop.html>
+    - Both modules are required in tandem: [Usage Example][StackOverflow WAV]
+    - A Simple Example: [Basic Frequency - StackOverflow][StackOverflow FFT]
+    - A Starting Place for Further Reading: [FFT Tone][FFT Tone]
+
+Issues that may be relevant in the future: `01_NodePy` does *not* include any
+test involving continuous communication comparable to the "30 fps" required by
+the actual app. Continuous communication will be necessary so that the Python
+app does not restart 30 times every second, so continuous communication is
+two-way or only one way, support will have to be developed and tested.
+
+[StackOverflow Mic]: https://stackoverflow.com/questions/1936828/how-get-sound-input-from-microphone-in-python-and-process-it-on-the-fly
+[StackOverflow WAV]: https://stackoverflow.com/questions/27895186/what-type-of-file-is-the-sound-fragment-parameter-for-audioop
+[StackOverflow FFT]: https://stackoverflow.com/questions/2648151/python-frequency-detection
+[FFT Tone]: https://medium.com/@anht_59851/tone-frequency-detection-from-an-audio-file-by-python-44d673f2e26b
 
 ### Webpage
 <https://assistant-robotic-musician.herokuapp.com>
