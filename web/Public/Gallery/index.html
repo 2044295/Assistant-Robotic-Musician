@@ -6,6 +6,8 @@
       onclick="button(0)">September 2020</button>
     <button type="button" name="November" class="w3-light-grey w3-button"
       onclick="button(1)">November 2020</button>
+    <button type="button" name="November" class="w3-light-grey w3-button"
+      onclick="button(2)">December 2020</button>
   </div>
   <br />
   <div id="Photo Update" style="width: 75%; margin: auto;">
@@ -29,14 +31,17 @@
 
       let dates = [
         "2020-09-29.gif",
-        "2020-11-19.png"
+        "2020-11-19.png",
+        "2020-12-11.gif"
       ];
 
       let descriptions = [
         "29 September 2020: A simple text-based application for serving HTML.\n"
         + "Our first tangible product, to be used in front-end development.",
         "19 November 2020: The output of an experimental script that uses\n"
-        + "PythonShell to run Python in NodeJS (for computations)."
+        + "PythonShell to run Python in NodeJS (for computations).",
+        "11 December 2020: The output of an experimental script that reads\n"
+        + ".wav audio files in 30 'frames' per second."
       ];
 
       let date = dates[photoIndex];
@@ -72,7 +77,8 @@
 
       let updates = [
         "Update1-Sep2020.pdf",
-        "Update2-Nov2020.pdf"
+        "Update2-Nov2020.pdf",
+        "Update3-Dec2020.pdf"
       ];
 
       if (presentIndex >= updates.length) {
