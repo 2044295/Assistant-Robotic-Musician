@@ -82,6 +82,7 @@ problems, and any other relevant information. These file include:
     - Next task: Reading from live input as it comes in
     - Next task: Implementing the `FFT` algorithm for note detection
     - For reading and writing: <https://docs.python.org/3/library/wave.html>
+    - For microphone input: [pyALSAAUDIO - StackOverflow][StackOverflow Mic]
     - For processing data: <https://docs.python.org/3/library/audioop.html>
     - Both modules are required in tandem: [Usage Example][StackOverflow WAV]
     - A Simple Example: [Basic Frequency - StackOverflow][StackOverflow FFT]
@@ -93,6 +94,7 @@ the actual app. Continuous communication will be necessary so that the Python
 app does not restart 30 times every second, so continuous communication is
 two-way or only one way, support will have to be developed and tested.
 
+[StackOverflow Mic]: https://stackoverflow.com/questions/1936828/how-get-sound-input-from-microphone-in-python-and-process-it-on-the-fly
 [StackOverflow WAV]: https://stackoverflow.com/questions/27895186/what-type-of-file-is-the-sound-fragment-parameter-for-audioop
 [StackOverflow FFT]: https://stackoverflow.com/questions/2648151/python-frequency-detection
 [FFT Tone]: https://medium.com/@anht_59851/tone-frequency-detection-from-an-audio-file-by-python-44d673f2e26b
