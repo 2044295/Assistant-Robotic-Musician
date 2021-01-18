@@ -63,6 +63,13 @@ problems, and any other relevant information. These file include:
 
 <!--Use this space to add details about development of `app`-->
 
+Requirements:
+
+- A working installation of `python3`
+- The following standard packages: `sys`, `argparse`, `json`, `wave,`,
+  `audioop`, `numpy`, and `time`
+- The following additional packages: `pyaudio` and `soundfile`
+
 01. `01_NodePy`: A Python3 and a NodeJS pair for using Python within the app
     - Demonstrates a variety of functions, from running python one-liners, to
       simple text-based input/output from a script, to JSON data transmission
@@ -79,14 +86,26 @@ problems, and any other relevant information. These file include:
 03. `03_smmlAudio`: A collection of increasingly-advanced Python/Audio tests
     - Opening and closing a `.wav` file through various means
     - Reading a `.wav` file, as a whole and a segments ("frames")
-    - Next task: Reading from live input as it comes in
-    - Next task: Implementing the `FFT` algorithm for note detection
+    - Reading from live input as it comes in
+    - Implementing the `FFT` algorithm for note detection
+    - New Task: Detecting the volume of a given frame
     - For reading and writing: <https://docs.python.org/3/library/wave.html>
     - For microphone input: [pyALSAAUDIO - StackOverflow][StackOverflow Mic]
+        - <https://people.csail.mit.edu/hubert/pyaudio/docs/>
     - For processing data: <https://docs.python.org/3/library/audioop.html>
-    - Both modules are required in tandem: [Usage Example][StackOverflow WAV]
     - A Simple Example: [Basic Frequency - StackOverflow][StackOverflow FFT]
-    - A Starting Place for Further Reading: [FFT Tone][FFT Tone]
+    - An idea for the future: using `curses` to improve displaying data
+        - Could overwrite the data array each time, rather than printing anew
+        - <https://docs.python.org/3/howto/curses.html>
+        - [Curses Usage - StackOverflow][StackOverflow Curses]
+
+Issues with `03_smmlAudio.py`: Samples `-3` and `-5` complain about using the
+`curses` module for display. The error seems to be that the program eventually
+tries to output too much data, which causes an error in `curses`. This is an
+unresolved issue but is a minor detail, as it does not affect the functioning
+of the main app, and sample `-3` and `-5` worked before the new display mode
+broke the code. This issue has been resolved in samples `-4` and `-6` by
+reducing the audio sample rate to 1000 Hz.
 
 Issues that may be relevant in the future: `01_NodePy` does *not* include any
 test involving continuous communication comparable to the "30 fps" required by
@@ -95,9 +114,13 @@ app does not restart 30 times every second, so continuous communication is
 two-way or only one way, support will have to be developed and tested.
 
 [StackOverflow Mic]: https://stackoverflow.com/questions/1936828/how-get-sound-input-from-microphone-in-python-and-process-it-on-the-fly
-[StackOverflow WAV]: https://stackoverflow.com/questions/27895186/what-type-of-file-is-the-sound-fragment-parameter-for-audioop
 [StackOverflow FFT]: https://stackoverflow.com/questions/2648151/python-frequency-detection
 [FFT Tone]: https://medium.com/@anht_59851/tone-frequency-detection-from-an-audio-file-by-python-44d673f2e26b
+[StackOverflow Curses]: https://stackoverflow.com/questions/6840420/rewrite-multiple-lines-in-the-console
+
+##### More on Audio Processing and Fourier Transformations
+- A Simple Example: [Basic Frequency - StackOverflow][StackOverflow FFT]
+- A Starting Place for Further Reading: [FFT Tone][FFT Tone]
 
 ### Webpage
 <https://assistant-robotic-musician.herokuapp.com>
