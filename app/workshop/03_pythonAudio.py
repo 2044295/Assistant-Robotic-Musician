@@ -135,36 +135,38 @@ if argv.sample_three:
         results['frames']           = \
             int(results['sample_length_f']/results['frame_sz'])
 
-        # Starting the data display window (using curses)
-        stdscr = curses.initscr()
-        curses.noecho()
-        curses.cbreak()
+        # Using a try-finally block so if/when curses complains, nothing breaks
+        try:
+            # Starting the data display window (using curses)
+            stdscr = curses.initscr()
+            curses.noecho()
+            curses.cbreak()
 
-        for x in range(results['frames']):
-            stdscr.clear()
-            # Reading the data for the given frame; header updates automatically
-            data = audio.readframes(results['frame_sz'])
-            results['data'] = str(data)
+            for x in range(results['frames']):
+                stdscr.clear()
+                # Reading data for the given frame; header updates automatically
+                data = audio.readframes(results['frame_sz'])
+                results['data'] = str(data)
 
-            # Defining the format of the unpacked data (must control for width)
-            fmt_str = '{:.0f}h'.format(len(data)/results['sample_width_bt'])
-            if argv.comment: print('fmt_str: {}\n'.format(fmt_str))
-            if argv.comment: print('length: {}\n'.format(len(data)));
+                # Defining format of the unpacked data (must control for width)
+                fmt_str = '{:.0f}h'.format(len(data)/results['sample_width_bt'])
+                if argv.comment: stdscr.addstr('fmt_str: {}\n'.format(fmt_str))
+                if argv.comment: stdscr.addstr('length: {}\n'.format(len(data)))
 
-            # Extracting the data as numbers (using floats for the sake of JSON)
-            numbers = np.array(wave.struct.unpack(fmt_str, data), dtype='float')
-            results['numbers'] = list(numbers)
-            if argv.comment: print('shape: {}\n'.format(numbers.shape))
+                # Extracting the data as numbers (floats for the sake of JSON)
+                nums = np.array(wave.struct.unpack(fmt_str, data),dtype='float')
+                results['numbers'] = list(nums)
+                if argv.comment: stdscr.addstr('shape: {}\n'.format(nums.shape))
 
-            # Printing the data for the given frame
-            stdscr.addstr(0, 0, str(numbers))
-            stdscr.refresh()
-            time.sleep(0.5)
-
-        # And, last but not least, closing the data display window
-        curses.echo()
-        curses.nocbreak()
-        curses.endwin()
+                # Printing the data for the given frame
+                stdscr.addstr(0, 0, str(nums))
+                stdscr.refresh()
+                time.sleep(0.25)
+        finally:
+            # And, last but not least, closing the data display window
+            curses.echo()
+            curses.nocbreak()
+            curses.endwin()
 
 # Ex 4: Reading microphone input
 if argv.sample_four:
@@ -237,7 +239,7 @@ if argv.sample_four:
         stream.close()
         audio.terminate()
 
-# Ex 5: FFT Extraction
+# Ex 5: FFT Extraction (Audio)
 if argv.sample_five:
     results = {}
 
@@ -313,7 +315,7 @@ if argv.sample_five:
                     + '\n')
                 stdscr.refresh()
                 frame += 1
-                time.sleep(0.5)
+                time.sleep(0.25)
         except Exception as e:
             print(str(e))
         finally:
@@ -322,6 +324,7 @@ if argv.sample_five:
             curses.nocbreak()
             curses.endwin()
 
+# Ex 6: FFR Extraction (Live)
 if argv.sample_six:
     if argv.comment:
         print('Example 6: Extracting FFT data from useful input frame')

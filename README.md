@@ -83,7 +83,7 @@ Requirements:
     - Includes both the documentation, as well as the original brainstorming
     - Extension of `HTML`, adding a few new tags and functions
     - Intended to, eventually, integrate
-03. `03_smmlAudio`: A collection of increasingly-advanced Python/Audio tests
+03. `03_pythonAudio`: A collection of increasingly-advanced Python/Audio tests
     - Opening and closing a `.wav` file through various means
     - Reading a `.wav` file, as a whole and a segments ("frames")
     - Reading from live input as it comes in
