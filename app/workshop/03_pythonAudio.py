@@ -5,7 +5,6 @@ import argparse
 import json
 import curses
 import wave
-import audioop
 import numpy as np
 import time
 import pyaudio
