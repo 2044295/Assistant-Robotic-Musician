@@ -27,6 +27,10 @@ parser.add_argument('-5', '--sample_five', action='store_true',
                     help='Ex 5: FFT Extraction of .wav frames')
 parser.add_argument('-6', '--sample_six', action='store_true',
                     help='Ex 6: FFT Extraction of live input frames')
+parser.add_argument('-7', '--sample_seven', action='store_true',
+                    help='Ex 7: Various experiments into volume')
+parser.add_argument('--gate', action='store', default='100',
+                    help='Variable defining the "noise gate," any int')
 parser.add_argument('--comment', action='store_true',
                     help='Print non-JSON comments to the terminal')
 parser.add_argument('--overwrite', action='store_true',
@@ -120,7 +124,7 @@ if argv.sample_three:
     with wave.open('Aud8k.wav') as audio:
         if argv.comment:
             print('Example 3: Reading a .wav file in useful frames')
-            print('- Reading 30 "frames per second" at 2 frames per second')
+            print('- Reading 30 "frames per second" at 4 frames per second')
             print('- 30 "frames per second" because A1 = 55hz')
             print('- And printing 2 frames per second for the human mind')
             time.sleep(5)
@@ -246,7 +250,7 @@ if argv.sample_five:
     with wave.open('Aud8k.wav') as audio:
         if argv.comment:
             print('Example 5: Extracting FFT Data from useful .wav frames')
-            print('- Reading 30 "frames per second" at 2 frames per second')
+            print('- Reading 30 "frames per second" at 4 frames per second')
             print('- 30 "frames per second" because A1 = 55hz')
             print('- And printing 2 frames per second for the human mind')
             time.sleep(5)
@@ -416,6 +420,87 @@ if argv.sample_six:
         stream.close()
         audio.terminate()
 
-# WHERE TO GO FROM HERE:
-# - look into live input
-# - get into actual note recognition
+# Ex 7: Volume Experiments
+if argv.sample_seven:
+    results = {}
+
+    if argv.comment:
+        print('Example 7: Various experiments into volume')
+        print('- Using only live audio for the best feedback')
+        print('- Skipping FFT algorithm, since it is unrelated to volume')
+        print('- Finding regular sum, absolute-value sum, and square sum')
+        print('- Main use: detecting "silence"')
+        time.sleep(5)
+
+    # Defining the important metadata (we can do that for the microphone)
+    results['sample_rate_hz']   = 1000   # smaller, so curses doesn't break
+    results['frame_sz']         = int(results['sample_rate_hz']/30)
+    results['sample_width_bt']  = 2 # appears to work -- assume the same
+    results['audio_format']     = pyaudio.paInt16
+    results['channels']         = 1
+
+    # Creating the audio input object with the given requirements
+    audio = pyaudio.PyAudio()
+    stream = audio.open(format=results['audio_format'],
+                        channels=results['channels'],
+                        rate=results['sample_rate_hz'], input=True,
+                        frames_per_buffer=results['frame_sz'])
+
+    # Using a try-finally block so if/when curses complains, nothing breaks
+    try:
+        # Start listening to audio
+        stream.start_stream()
+
+        # Start the data display window
+        stdscr = curses.initscr()
+        curses.noecho()
+        curses.cbreak()
+        frame = 0
+
+        while True:
+            stdscr.clear()
+            # Reading the data for the given frame; header updates automatically
+            data = stream.read(results['frame_sz'])
+            results['data'] = str(data)
+
+            # Defining the format of the unpacked data (must control for width)
+            fmt_str = '{:.0f}h'.format(len(data)/results['sample_width_bt'])
+            if argv.comment: print('fmt_str: {}'.format(fmt_str))
+            if argv.comment: print('length of data: {}'.format(len(data)));
+
+            # Extracting the data as numbers (using floats for the sake of JSON)
+            numbers = np.array(wave.struct.unpack(fmt_str, data), dtype='float')
+            results['numbers'] = list(numbers)
+            if argv.comment: print('shape of array: {}'.format(numbers.shape))
+
+            # Various calculations
+            gate = int(argv.gate)           # minimum required value to record
+            vol_sum = sum(numbers)          # summing with no ops; useless
+            vol_abs = sum(abs(numbers))     # absolute values - rather useful
+            vol_sqr = sum(numbers ** 2)     # sum of the squares of the bytes
+            vol_adj = sum([abs(x) for x in numbers if abs(x) > gate]) # best
+                # it seems like a noise gate of 10 covers "silence" just fine
+
+            # Printing the data for the given frame
+            stdscr.addstr('Frame: {}\n'.format(frame))
+            stdscr.addstr('Sum of Recorded Bytes: {}\n'.format(vol_sum))
+            stdscr.addstr('Absolute-Value Sum: {}\n'.format(vol_abs))
+            stdscr.addstr('Sum of the Squares: {}\n'.format(vol_sqr))
+            stdscr.addstr('Noise-Gate Adjusted Volume: {}\n'.format(vol_adj))
+            stdscr.addstr('vol_adj/vol_abs: {}\n'.format(vol_adj/vol_abs))
+            stdscr.refresh()
+            frame += 1
+    except KeyboardInterrupt:
+        print("Done recording")
+    except Exception as e:
+        print(str(e))
+    finally:
+        # Close the display window (so terminal doesn't freak out)
+        curses.echo()
+        curses.nocbreak()
+        curses.endwin()
+
+        # Close the stream (so that nothing is unresolved)
+        stream.stop_stream()
+        stream.close()
+        audio.terminate()
