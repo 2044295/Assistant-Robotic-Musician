@@ -6,13 +6,15 @@
       onclick="button(0)">September 2020</button>
     <button type="button" name="November" class="w3-light-grey w3-button"
       onclick="button(1)">November 2020</button>
-    <button type="button" name="November" class="w3-light-grey w3-button"
+    <button type="button" name="December" class="w3-light-grey w3-button"
       onclick="button(2)">December 2020</button>
+    <button type="button" name="January" class="w3-light-grey w3-button"
+      onclick="button(3)">January 2021</button>
   </div>
   <br />
   <div id="Photo Update" style="width: 75%; margin: auto;">
     <img  id="Photo"
-          style="width: 100%; border: 5px solid #000; border-radius: 5px"></img>
+          style="width: 100%; border: 0px; border-radius: 5px"></img>
     <p    id="Caption">PLACEHOLDER</p>
   </div>
   <iframe id="Presentation Update"></iframe>
@@ -32,7 +34,8 @@
       let dates = [
         "2020-09-29.gif",
         "2020-11-19.png",
-        "2020-12-11.gif"
+        "2020-12-11.gif",
+        "2021-01-25.png"
       ];
 
       let descriptions = [
@@ -41,7 +44,9 @@
         "19 November 2020: The output of an experimental script that uses\n"
         + "PythonShell to run Python in NodeJS (for computations).",
         "11 December 2020: The output of an experimental script that reads\n"
-        + ".wav audio files in 30 'frames' per second."
+        + ".wav audio files in 30 'frames' per second.",
+        "25 January 2021: The output of an experimental script that reads\n"
+        + "live microphone data and extracts the waveform and frequency."
       ];
 
       let date = dates[photoIndex];
@@ -78,7 +83,8 @@
       let updates = [
         "Update1-Sep2020.pdf",
         "Update2-Nov2020.pdf",
-        "Update3-Dec2020.pdf"
+        "Update3-Dec2020.pdf",
+        "Update4-Jan2021.pdf"
       ];
 
       if (presentIndex >= updates.length) {
