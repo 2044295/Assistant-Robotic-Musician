@@ -66,9 +66,9 @@ problems, and any other relevant information. These file include:
 Requirements:
 
 - A working installation of `python3`
-- The following standard packages: `sys`, `argparse`, `json`, `wave,`,
-  `audioop`, `numpy`, and `time`
-- The following additional packages: `pyaudio` and `soundfile`
+- The following standard packages: `sys`, `argparse`, `json`,`curses`, `time`,
+  `wave,`, and `numpy`
+- The following additional packages: `pyaudio`
 
 01. `01_NodePy`: A Python3 and a NodeJS pair for using Python within the app
     - Demonstrates a variety of functions, from running python one-liners, to
@@ -83,7 +83,7 @@ Requirements:
     - Includes both the documentation, as well as the original brainstorming
     - Extension of `HTML`, adding a few new tags and functions
     - Intended to, eventually, integrate
-03. `03_smmlAudio`: A collection of increasingly-advanced Python/Audio tests
+03. `03_pythonAudio`: A collection of increasingly-advanced Python/Audio tests
     - Opening and closing a `.wav` file through various means
     - Reading a `.wav` file, as a whole and a segments ("frames")
     - Reading from live input as it comes in
