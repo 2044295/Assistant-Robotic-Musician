@@ -1,0 +1,9 @@
+<!DOCTYPE SMML>
+<body>
+<section id="foo">
+    <measure>
+        <note class="foo bar   hello"></note>
+        <note>shorthand   mumbo jumbo   </note>
+    </measure>
+</section>
+</body>
