@@ -3,7 +3,7 @@
 const fs = require('file-system');
 
 // Reading the data synchronously so it's available whenever we need it
-const freqData = JSON.parse(fs.readFileSync('04_PitchFreq.json'));
+const freqData = JSON.parse(fs.readFileSync('04_PitchData.json'));
 
 function getPitchExact(freq) {
   // Comparing indeces of frequency and specific pitch in respective lists
