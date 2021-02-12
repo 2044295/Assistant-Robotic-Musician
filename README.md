@@ -67,7 +67,7 @@ Requirements:
 
 - A working installation of `python3`
 - The following standard packages: `sys`, `argparse`, `json`,`curses`, `time`,
-  `wave,`, and `numpy`
+  `wave,`, `re` (regex), and `numpy`
 - The following additional packages: `pyaudio`
 
 01. `01_NodePy`: A Python3 and a NodeJS pair for using Python within the app

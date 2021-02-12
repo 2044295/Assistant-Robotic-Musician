@@ -72,6 +72,8 @@ to create such a data tree, read on.
     - Essentially, this should be a customizable extension of HTML
 - The `music` tag is practically just a `div` with a default class and with
   certain HTML extensions (outlined below)
+    - The opening tag may include various options or extensions, but the closing
+      tag must exactly match `</music>`, or an error will occur
 
 ```css
 div.music {
@@ -91,30 +93,51 @@ div.jazz {
 ##### The Section Unit
 - Every piece is automatically divided into sections for processing; even if
   there is only a "Section I," all music must exist within a section
+    - Conceptually, all music exists contained in some form of container
+    - For processing purposes, section grouping must be explicitly stated
+    - Any data not grouped into a section will be ignored
 - A section, as a unit, is just a `div`, which may contain text, IDs, etc.
-- Identifiers in the form of `id="section-<NUM>"` will manually group measures
-  into sections; otherwise, they will be grouped automatically
-    - `<NUM>` should be a positive `int` $\{1, \ldots, n\}$
+- Identifiers in the form of `id="section-<NUM>-<STR>"` will create a manual
+  section identifier; otherwise, they will be numbered automatically
+    - `<NUM>` must be an integer that matches the expected enumeration
+    - `<STR>` may be any desired string, which `SMML` uses to track the piece
+    - Any break from this format will raise an error
     - `SMML` will interpret any ungrouped measures based on their numbers
 - All section markup (titles, etc.) must be manually provided
 
 ### Measures
 - Like sections, measures are comparable to `div`s, but they have their own tag
+    - Just like sections, all measure grouping must be explicitly stated --
+      and notes not grouped inside of a measure are simply ignored
 - `<measure></measure>` creates a `measure` object, with certain properties:
 
 ```
-let options: {
-  time: '4/4',
-  meter: 'simple',
-  key: 'C',
-  number: 'auto',
-  grouping: 'n/a'
-  other: {
-    placement: '-X-',
+<measure options='<OPTIONS>'></measure>s
+
+options: {
+  'time': '4/4',
+  'meter': 'simple',
+  'key': 'C',
+  'number': 'auto',
+  'grouping': 'n/a'
+  'other': {
+    'placement': '-X-',
   }
 }
+```
 
-<measure options='${options}'></measure>
+- `<OPTIONS>` must be replaced by an inline JSON object
+- The `options` dictionary outlined above lists the defaults for each option
+    - Not all options need be provided -- only options changing from the default
+    - When a `measure` sets a new option, the processor adopts that option as
+      the default until a new option is selected, which becomes the new default:
+
+```
+<!--two measures of 3/4 and a measure of 5/8-->
+
+<measure options="{time: '3/4'}"></measure>
+<measure></measure>
+<measure options="{time: '5/8'}"></measure>
 ```
 
 ##### Time Signature and Meter
@@ -126,13 +149,15 @@ let options: {
 ##### Key Signature
 - `key`: the key signature of the measure, specifically the major key
     - The key of Am, for example, would be `key: 'C'`
+    - Key should be specified using pitch notation outlined for notes
+      (i.e. $\rm D\flat$ major as `key: 'D-'`)
 
 ##### Measure Numbers
 - `number`: the measure number `'n'` or range of numbers `'m:n'`
     - To simplify the notation process, measures with identical properties may
       be grouped into a single `measure` object
-    - `number` should be a string, containing an integer, a decimal indicating
-      both section and number, or a range of integers (i.e. `2:7`)
+    - `number` should be a string containing an integer or a range of integers
+      (i.e. `2:7`)
     - For more on numbering, see: [How it Works](#how-it-works)
 
 ##### Measures Other
@@ -178,6 +203,12 @@ let options: {
     - Format: `'<Capital Letter>' + '<Integer>'`
     - Accidentals are indicated with one or more `+`, `-`, or `=`, which is
       appended after the note name (i.e. `E4++`)
+        - No accidentals such as `C#4`, `Db5`, etc.
+        - Key signature accidentals are not automatically included -- i.e., in
+          `key: 'D'`, the pitch `'C4'` would have a natural sign while the
+          pitch `'C4+'` would have no accidentals
+        - Accidental notes that match the specified key signature have their
+          accidental dropped when SMML is displayed
     - Microtones are indicated with `+` or `-` an integer or a float, in cents
 - The current version of SMML does not support multiple voices or multi-staff
   instruments (such as the piano)

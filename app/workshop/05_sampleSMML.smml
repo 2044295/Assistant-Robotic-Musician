@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<body>
+<music>
+  <!--Here's some ungrouped text that gets dropped-->
+  <section>
+    <!--this is sample text in the most basic of all sections-->
+  </section>
+  <section id="section-2">
+    <!--this is sample text in a slightly more complicated section-->
+    <!--first, an empty sample measure-->
+    <measure></measure>
+    <!--now with some notes (default C Major, 4/4)-->
+    <measure>
+      <note>C4, 1, 1</note>
+      <note>E4, 2, 1</note>
+      <note>G4, 3, 1</note>
+      <note>C5, 4, 1</note>
+    </measure>
+    <!--now the same arpeggio, changing to D Major-->
+    <measure options="{"key": "D"}">
+      <note>D4, 1, 1</note>
+      <note>F4+, 2, 1</note>
+      <note>A4, 3, 1</note>
+      <note>D5, 4, 1</note>
+    </measure>
+    <!--now with two measures of 3/4, changing to D Major-->
+    <measure options="{"time": "3/4", "number": "4:6"}">
+      <note>D5, 1, 1</note>
+      <note>C5+, 2, 1</note>
+      <note>B4, 3, 1</note>
+      <note>A4, 1, 1</note>
+      <note>B4, 2, 1</note>
+      <note>C5+, 3, 1</note>
+      <note>D5, 1, 1</note>
+    </measure>
+  </section>
+  <section id="section-1">
+    <!--this erronious section will get ignored-->
+  </section>
+  <section id="section-4">
+    <!--ideally, this non-erroneous section still gets addressed-->
+  </section>
+  <!--And some "after" ungrouped text, for good measure (heh)-->
+</music>
+</body>
