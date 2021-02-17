@@ -60,8 +60,14 @@ with open(filename, 'r') as myfile:
         else:
             raise ValueError('Invalid mode detected')
 
-"""print(output)"""
 text = output # this would be the "return" in the actual program
+
+### Some arguments
+comment = False
+if '--comment' in sys.argv:
+    comment = True
+if comment:
+    print(output)
 
 ### From "04_PitchFreq.py" -- when in package, just import
 with open('04_PitchData.json', 'r') as myfile:
@@ -112,7 +118,7 @@ def interpret_music(data, container):
 
 ### Next, extract and store the data properly grouped into sections
 def interpret_section(n, data, container):
-    # "skip" signal
+    # "skip" signal -- for data that doesn't have a "section" tag
     if data == '':
         container.append('')
         return(n, '') # skipped section neither recorded nor counted
@@ -129,11 +135,11 @@ def interpret_section(n, data, container):
     container.append(section)
 
     # using regex to match any possible id string
-    id = re.search(' id=\".*\"[ >]', tag)
+    id = re.search(' id=[\"\'].*[\"\'][ >]', tag)
     if id is not None:
         # check that id matches the expected format
-        if id[0][5:-2] != 'section-{}'.format(n):
-            print(n, 'Error: {} does not match required format'.format(tag))
+        if id[0][5:-2].startswith('section-{}'.format(n)) is False:
+            print('Error: {} does not match required format'.format(tag))
             return(n, '') # erroneous section not recorded but still counted
 
     # everything checks out -- return as normal
@@ -155,7 +161,7 @@ def interpret_measure(i, data, options, container):
     container.append(measure)
 
     # extract options from the tag
-    new_options = re.search(' options=\"\{.*\}\"[ >]', tag)
+    new_options = re.search(' options=[\"\']\{.*\}[\"\'][ >]', tag)
     if new_options is not None:
         new_options = new_options[0][10:-2]
         new_options = json.loads(new_options)
@@ -214,6 +220,7 @@ def interpret_measure(i, data, options, container):
     # and last but not least, return all the processed data
     return(i, measure, options)
 
+### Program interprets encoded note data
 def interpret_note(i, j, data, options, container):
     # "skip" signal
     if data == '':
@@ -227,10 +234,18 @@ def interpret_note(i, j, data, options, container):
     note = data[tag_start + len(tag):] # note that ungrouped data is dropped
     container.append(note)
 
-    # jumping to the "except" case (when not in full JSON form)
-    note_data = [x.strip() for x in note.split(',')]
-    pitch = note_data[0]
-    beat = note_data[1]
+    # try to extract the data as full JSON
+    note_data = re.search('\{.*\}', tag)
+    if note_data is not None:
+        note_data = json.loads(new_options)
+        pitch = note_data['pitch']
+        beat = note_data['beat']
+        length = note_data['length']
+    else:
+        note_data = [x.strip() for x in note.split(',')]
+        pitch = note_data[0]
+        beat = note_data[1]
+        length = note_data[2]
 
     if re.fullmatch('[0-9]+/[0-9]+', beat) is not None:
         beatlist = [int(x) for x in beat.split('/')]
@@ -251,7 +266,7 @@ def interpret_note(i, j, data, options, container):
         print('Error: Beat Value Too Large: {}'.format(beat))
         return(i, j, [])
 
-    # get the expected frequency
+    # get the expected pitch
     pitch_base = pitch[0:2]
     if len(pitch) > 2:
         pitch_acc = pitch[2:]
@@ -263,7 +278,7 @@ def interpret_note(i, j, data, options, container):
         if char == '+': pitch_index += 1
         if char == '-': pitch_index -= 1
     pitch = freqData['pitches'][pitch_index]
-    freq = freqData[pitch]
+    # freq = freqData[pitch] -- not used; program detects pitch + error to match
 
     # figure out the "node" of the note
     if num/denom < j:
@@ -273,7 +288,36 @@ def interpret_note(i, j, data, options, container):
 
     node = '{}.{}'.format(i[0], beat)
 
-    return(i, j, [node, freq])
+    return(i, j, [node, pitch])
+
+### Program cleans up its output
+def cleanup(nodes):
+    cleaned_nodes = []
+
+    # start by concatenating all lists starting with a certain node
+    node = [None, 0]
+    for i, item in enumerate(nodes):
+        # we only operate on nonempty lists
+        if type(item) is list:
+            if len(item) > 0:
+                # positive match -- concatenate and clear duplicate
+                if item[0] == node[0]:
+                    item.pop(0)
+                    nodes[node[1]] += item
+                    nodes[i] = []
+                # negative match -- tell the computer we've a new node
+                else:
+                    node = [item[0], i]
+
+    # then, loop over the object to recursively clean it up
+    for i, item in enumerate(nodes):
+        if type(item) is list:
+            if item != []:
+                cleaned_nodes.append(cleanup(item))
+        else:
+            cleaned_nodes.append(item)
+
+    return(cleaned_nodes)
 
 ## Starting from the top
 section = 1
@@ -326,24 +370,9 @@ for m, data in enumerate(text.split('</music>')):
     if music != '':
         music_nodes.append(temp_node)
 
-print(json.dumps(container, indent=2))
-for grouping in music_nodes:
-    print(json.dumps(grouping, indent=2))
+music_nodes = cleanup(music_nodes)
 
-"""
-### Separating output into tags
-n = 0
-container = []
-while n < len(output):
-    if not(output[0] == '<'):
-        raise ValueError("Expected '<' to start tag, found {}".format(text[0]))
-
-    tag_type = output[n:].split(' ')[0][1:] # take first 'word' and drop '<'
-    tag_end  = '</{}>'.format(tag_type)
-    tag      = text[:text.find(tag_end)] + tag_end
-
-    container.append(tag)
-    n += len(tag)
-
-print(container)
-"""
+if comment:
+    print(json.dumps(container, indent=2))
+for node in music_nodes:
+    print(json.dumps(node, indent=2))

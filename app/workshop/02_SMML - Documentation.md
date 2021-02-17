@@ -112,7 +112,7 @@ div.jazz {
 - `<measure></measure>` creates a `measure` object, with certain properties:
 
 ```
-<measure options='<OPTIONS>'></measure>s
+<measure options="<OPTIONS>"></measure>s
 
 options: {
   'time': '4/4',
@@ -215,7 +215,7 @@ options: {
 
 ##### Beat and Length
 - `beat`: a string indicating the starting beat of the note
-- `length`: a string indicating the length of the note
+- `length`: a string indicating the length (in beats) of the note
 - Both `beat` and `length` strings should be in the format of an integer or an
   improper fraction, since all notated music is mathematically perfect
 - By default, the `beat` property of a note inherits a section and measure
