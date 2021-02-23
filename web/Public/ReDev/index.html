@@ -14,8 +14,8 @@
       </p>
     </div>
     <div id="functionality" class="w3-third">
-      <img  style="width: 95%; min-width: 15em; max-width: 25em;
-                  border: 5px solid black; border-radius: 5px"
+      <img  style="width: 95%; min-width: 15em; max-width: 25em; border: 5px
+            solid black; border-radius: 5px" onclick="onClick(this)"
             src="/ReDev/2020-10-15_AppFlowchart.png" alt="ARM Functionality">
       </img>
     </div>
@@ -30,9 +30,10 @@
       </p>
     </div>
   </div>
-  <div id="python" style="overflow: auto; padding: 2em 0;">
+
+  <div id="nodejs" style="overflow: auto; padding: 2em 0;">
     <h2>The Tasks</h2>
-    <div id="coding-tasks" class="w3-half">
+    <div id="nodejs-coding-tasks" class="w3-half">
       <h3>NodeJS: Python-Shell</h3>
       <p>
         <code>Python-Shell</code> provides an API that allows NodeJS to run
@@ -49,6 +50,17 @@
         data exchange, a limitation which the program must work around in order
         to support a continuous data stream of Python feedback.
       </p>
+    </div>
+    <div id="nodejs-coding-images" class="w3-half">
+      <img  style="width: 100%; min-width: 15em; max-width: 25em; border: 5px
+            solid black; border-radius: 5px" onclick="onClick(this)"
+            src="/Gallery/2020-11-19.png" alt="Sample output demonstrating
+            various methods of Python-NodeJS cross-communication">
+      </img>
+    </div>
+  </div>
+  <div id="python-audio" style="overflow: auto; padding: 2em 0;">
+    <div id="pyaudio-coding-tasks" class="w3-half">
       <h3>Python: SMML Audio Processing</h3>
       <p>
         <a href="https://github.com/2044295/Assistant-Robotic-Musician/blob/master/app/workshop/02_SMML%20-%20Documentation.md">
@@ -65,25 +77,70 @@
         identifying the present frequencies using <code>numpy.fft</code>. An FFT
         (a Fast Fourier Transformation) is an algorithm for extracting
         frequencies from an audio fragment.<br />
-        Experiments so far have touched only on the first of those tasks:
-        understanding the process of reading audio data from files. The program
-        still must develop functions for reading and processing continuous input
-        (as of that from a live source) and for using an FFT; after these
-        experiments are complete, the next task will be extracting musical
-        patterns and matching them to SMML objects.
+        Pictured at right is the experimental output from two different scripts
+        dealing with this two aspects of audio processing: Reading audio, from
+        audio files and from the microphone, as computer-readable data; and
+        processing that data to a list of numbers and an actual frequency. This
+        processed data is what passes to the second part of the SMML-processing
+        task.
       </p>
     </div>
-    <div id="coding-images" class="w3-half">
-      <img  style="width: 100%; min-width: 15em; max-width: 25em;
-                  border: 5px solid black; border-radius: 5px"
-            src="/Gallery/2020-11-19.png" alt="Sample Code Experiment Output">
+    <div id="pyaudio-coding-images" class="w3-half">
+      <img  style="width: 100%; min-width: 15em; max-width: 25em;"
+            onclick="onClick(this)" src="/Gallery/2020-12-10.png" alt="Sample
+            output demonstrating a method of reading audio files">
       </img><br /><br />
       <img  style="width: 100%; min-width: 15em; max-width: 25em;"
-            src="/Gallery/2020-12-10.png" alt="Sample Code Experiment Output">
-      </img><br /><br />
-      <img  style="width: 100%; min-width: 15em; max-width: 25em;"
-            src="/Gallery/2021-01-25.png" alt="Sample Code Experiment Output">
+            onclick="onClick(this)" src="/Gallery/2021-01-25.png" alt="Sample
+            output demonstrating frequency detection">
       </img>
     </div>
   </div>
+  <div id="python-smml" style="overflow: auto; padding: 2em 0;">
+    <div id="smml-coding-tasks" class="w3-half">
+      <h3>Python: SMML Implementation</h3>
+      <p>
+        Once the data has produced actual, precise decimal frequencies, the
+        computer must then compare that frequency to known frequencies to
+        determine the <emph>pitch</emph> it is hearing (in scientific pitch
+        notation such as C4 or G#6). It compares the decimal to a list of known
+        frequencies calculated around A4 = 440 Hz, the uses that list to find
+        the corresponding pitch, which is passed to another function that checks
+        whether or not the script should "step forward" in the music.<br />
+        To do so, the computer looks at a list of "nodes" (identifying points
+        in the music)&mdash;specifically, it looks at the "node" it is currently
+        expecting&mdash;and checks whether the observed pitch is a member of
+        that node. If a member of the node is present, the script decides that
+        the node has been reached, and outputs that node's text value, as well
+        as a list of measured pitch and pitch error, to the console.
+      </p>
+    </div>
+    <div id="smml-coding-images" class="w3-half">
+      <img  style="width: 100%; min-width: 15em; max-width: 25em;"
+            onclick="onClick(this)" src="/Gallery/2021-02-22.png" alt="Sample
+            output demonstrating pitch detection and 'node'-tracking">
+      </img>
+    </div>
+  </div>
+
+  <!-- Modal for full size images on click -->
+  <div  id="modal01" class="w3-modal w3-white" style="padding-top:0"
+        onclick="this.style.display='none'">
+    <span class="w3-button w3-black w3-xlarge w3-display-topright">×</span>
+    <div  class="w3-modal-content w3-animate-zoom w3-center w3-transparent
+          w3-padding-64">
+      <img id="img01" class="w3-image">
+      <p id="caption"></p>
+    </div>
+  </div>
+
+  <!-- Scripting to enable the modal images -->
+  <script type="text/javascript">
+    function onClick(element) {
+      document.getElementById("img01").src = element.src;
+      document.getElementById("modal01").style.display = "block";
+      var captionText = document.getElementById("caption");
+      captionText.innerHTML = element.alt;
+    }
+  </script>
 </div>

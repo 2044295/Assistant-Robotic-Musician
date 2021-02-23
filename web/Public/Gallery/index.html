@@ -10,6 +10,8 @@
       onclick="button(2)">December 2020</button>
     <button type="button" name="January" class="w3-light-grey w3-button"
       onclick="button(3)">January 2021</button>
+    <button type="button" name="February" class="w3-light-grey w3-button"
+      onclick="button(4)">February 2021</button>
   </div>
   <br />
   <div id="Photo Update" style="width: 75%; margin: auto;">
@@ -35,7 +37,8 @@
         "2020-09-29.gif",
         "2020-11-19.png",
         "2020-12-11.gif",
-        "2021-01-25.png"
+        "2021-01-25.png",
+        "2021-02-22.png"
       ];
 
       let descriptions = [
@@ -46,7 +49,9 @@
         "11 December 2020: The output of an experimental script that reads\n"
         + ".wav audio files in 30 'frames' per second.",
         "25 January 2021: The output of an experimental script that reads\n"
-        + "live microphone data and extracts the waveform and frequency."
+        + "live microphone data and extracts the waveform and frequency.",
+        "22 February 2021: The output of a script that processes detected\n"
+        + "frequencies and matches them to 'nodes' (identifiers) in the SMML."
       ];
 
       let date = dates[photoIndex];
@@ -84,7 +89,8 @@
         "Update1-Sep2020.pdf",
         "Update2-Nov2020.pdf",
         "Update3-Dec2020.pdf",
-        "Update4-Jan2021.pdf"
+        "Update4-Jan2021.pdf",
+        "Update5-Feb2021.pdf"
       ];
 
       if (presentIndex >= updates.length) {
