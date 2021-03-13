@@ -81,3 +81,23 @@ Reads the string in one of three modes:
 - content mode, preserving without question all text (except newlines)
   lowest-level mode, contained within each `note` tag
 ```
+
+```
+smmlprocess(text, mode='player')
+
+Reads a machine-formatted smml string (see smml.markup.read) and processes
+the SMML-encoded data to a serialized JSON object. Provides output in one
+of two `modes`: 'player' or 'display'.
+
+'Player' output returns a JSON list of "nodes" that describes the expected
+pitch(es) at each such "node," a numerical marker of a certain position in
+the piece. Specifically, this list contains each "music" object outlined
+in an SMML file; these "music" objects are lists of "sections." These
+sections are then sublists that contain a section number at index 0 and
+however many nodes the section contains; each node listing its identifier
+at index 0 and all expected pitches in the following indices.
+
+'Display' output returns a JSON object with all information necessary to
+generate an HTML-based sheet music display. This mode is currently
+underdeveloped.
+```
