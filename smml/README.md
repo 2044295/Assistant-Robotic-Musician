@@ -10,9 +10,9 @@ smml/                 # The main smml package
   audiofunc/          # Subpackage of various audio processing methods
     __init__.py         # Initializes the subpackage
     audioSetup.py       # Sets up the desired audio object with given callback
+    genPitch.py         # Generates and returns matching frequencies and pitches
     getPitchExact.py    # Detects exact matches to pitches in a pitchData object
     getPitchEstimate.py # Finds the nearest match in a pitchData object
-    pitchData.py        # Generates and returns matching frequencies and pitches
     pitchData.json      # A pre-generated pitchData object around A440
   markup/             # Subpackage for handling reading and writing SMML
     __init__.py         # Initializes the subpackage
@@ -48,6 +48,16 @@ smml/                 # The main smml package
 ```
 
 ##### `audiofunc/`
+
+```
+genPitch(a4=440)
+
+Generates a discrete list of matched frequencies and pitches, based on the
+given frequency for A4 (using A440 as a standard). Returns a JSON object
+containing an ordered list of frequencies, and ordered list of pitches, and
+frequencies indexed by pitch. The standard A440 list is available as
+smml.audiofunc.pitchData.
+```
 
 ##### `markup/`
 - Imports the following: `read,` `smmlprocess`

@@ -73,3 +73,6 @@ def read(text):
         # if none of these cases are true, there must be an error
         else:
             raise ValueError('Invalid mode detected')
+
+    # lastly, return output (if we get here)
+    return(output)

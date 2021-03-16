@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-import re
+import re, json
+from ..audiofunc import pitchData
 
 keysigs = {
     'C': [],
@@ -20,6 +21,7 @@ keysigs = {
     'C-': ['B-', 'E-', 'A-', 'D-', 'G-', 'C-', 'F-'],
 }
 default_options = {
+    'mode': 'player',
     'time': '4/4',
     'meter': 'simple',
     'key': 'C',
@@ -30,7 +32,7 @@ default_options = {
     }
 }
 
-# Extract + store data in the bulk "music" grouping -- relevant only to player
+# Extract + store data in the bulk "music" grouping -- complete
 def interpret_music(data, container):
     # "skip" signal
     if data == '':
@@ -38,12 +40,13 @@ def interpret_music(data, container):
         return('')
 
     # otherwise, extract the actual data
-    music = data[data.find('<music'):]
+    index = data.find('<music')
+    container.append([data[:index]])
+    music = data[index:]
     music = music[music.find('>') + 1:]
-    container.append([music])
     return(music)
 
-# Extract and store data in "section" grouping -- relevant only to player
+# Extract and store data in "section" grouping -- complete
 def interpret_section(n, data, container):
     # "skip" signal -- for data that doesn't have a "section" tag
     if data == '':
@@ -54,12 +57,12 @@ def interpret_section(n, data, container):
     n += 1
 
     # extract the section and tag data
-    tag_start = data.find('<section')
-    tag = data[tag_start:]
+    index = data.find('<section')
+    tag = data[index:]
     tag = tag[:tag.find('>') + 1]
-    section = data[tag_start + len(tag):] # note that ungrouped data is dropped
+    section = data[index + len(tag):]
+    container.append(data[:index])
     container.append(tag)
-    container.append(section)
 
     # using regex to match any possible id string
     id = re.search(' id=[\"\'].*[\"\'][ >]', tag)
@@ -72,7 +75,7 @@ def interpret_section(n, data, container):
     # everything checks out -- return as normal
     return(n, section)
 
-# Interpret an encountered measure object -- relevant to player and displayer
+# Interpret an encountered measure object                                       # needs display upgrade (save data + options)
 def interpret_measure(i, data, options, container):
     # "skip" signal
     if data == '':
@@ -147,7 +150,7 @@ def interpret_measure(i, data, options, container):
     # and last but not least, return all the processed data                     # needs display upgrade
     return(i, measure, options)
 
-# Interpret encoded note data -- relevant to player and displayer
+# Interpret encoded note data -- relevant to player and displayer               # needs display upgrade (save name + options)
 def interpret_note(i, j, data, options, container):
     # "skip" signal
     if data == '':
@@ -200,11 +203,11 @@ def interpret_note(i, j, data, options, container):
     else:
         pitch_acc = ''
 
-    pitch_index = freqData['pitches'].index(pitch_base)
+    pitch_index = pitchData['pitches'].index(pitch_base)
     for char in pitch_acc:
         if char == '+': pitch_index += 1
         if char == '-': pitch_index -= 1
-    pitch = freqData['pitches'][pitch_index]
+    pitch = pitchData['pitches'][pitch_index]
 
     # figure out the "node" of the note
     if num/denom < j:
@@ -216,7 +219,7 @@ def interpret_note(i, j, data, options, container):
 
     return(i, j, [node, pitch])                                                 # needs display upgrade
 
-# Cleans up the program output -- relevant to player only
+# Cleans up the program output -- relevant to player and displayer              # needs display upgrade
 def cleanup(nodes):
     cleaned_nodes = []
 
@@ -269,9 +272,9 @@ def smmlprocess(text, mode='player'):
     if mode not in ['player', 'display']:
         raise ValueError('Unexpected processing mode found: {}'.format(mode))
 
+    default_options['mode'] = mode
+
     # Starting from the top
-    section = 1
-    measure = 1
     grouping = False
     container = []
     music_nodes = []
@@ -285,7 +288,7 @@ def smmlprocess(text, mode='player'):
         music = interpret_music(data, container)
         temp_node = []
 
-        #### For each "section," create enumerated groupings
+        # For each "section," create enumerated groupings
         n = 0 # not using "enumerate" so we can manually count n
         for subdata in music.split('</section>'):
             if subdata.count('<section') == 0:
@@ -294,7 +297,7 @@ def smmlprocess(text, mode='player'):
             n, section = interpret_section(n, subdata, container[m])
             temp_sec = [n, []]
 
-            #### For each "measure," go through and enumerate notes
+            # For each "measure," go through and enumerate notes
             # using "i" to enumerate - [start, end, [GROUPING??]]]
             i = [0, 0] # not using "enumerate" so we can manually count i
             options = default_options # re-set for new section
@@ -304,6 +307,8 @@ def smmlprocess(text, mode='player'):
 
                 i, measure, options =\
                     interpret_measure(i, subsubdata, options, container[m])
+
+                contained_measures = [[]]
 
                 j = 0 # use to track when a multi-measure "loops" around
                 for notedata in measure.split('</note>'):
@@ -322,5 +327,7 @@ def smmlprocess(text, mode='player'):
 
     music_nodes = cleanup(music_nodes)
 
-    for node in music_nodes:
-        print(json.dumps(node, indent=2))
+    if mode == 'display':
+        return(container)
+    else:
+        return(music_nodes)
