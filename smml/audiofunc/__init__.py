@@ -8,3 +8,6 @@ from .genPitch import genPitch
 mypath = os.path.join(os.path.dirname(__file__), 'pitchData.json')
 with open(mypath, 'r') as myfile:
     pitchData = json.loads(myfile.read())
+
+from .getPitchExact import getPitchExact
+from .getPitchEstimate import getPitchEstimate
