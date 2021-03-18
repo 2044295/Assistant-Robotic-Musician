@@ -100,10 +100,11 @@ smml.audiofunc.pitchData.
 ```
 getPitchEstimate(freq, a4=440)
 
-Finds the nearest discrete pitch for which "freq" matches and returns a list of
-that pitch and the percentage of error. Uses getPitchExact for determining pitch
-once the nearest frequency is found; matches to a pitchData JSON object from
-genPitch(a4), with the pre-generated smml.audiofunc.pitchData when a4 == 440.
+Finds the nearest discrete pitch for which "freq" matches and returns a list
+of that pitch and the percentage of error. Uses getPitchExact for determining
+pitch once the nearest frequency is found; matches to a pitchData JSON object
+from genPitch(a4), with the pre-generated smml.audiofunc.pitchData when a4 ==
+440.
 ```
 
 ```

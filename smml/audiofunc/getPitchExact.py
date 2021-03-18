@@ -16,6 +16,7 @@ def getPitchExact(freq, a4=440):
     """
 
     # Ensure that pitchData is around the correct pitch
+    global pitchData, getPitchExact
     if a4 != 440:
         pitchData = genPitch(a4)
 
