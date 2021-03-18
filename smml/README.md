@@ -14,6 +14,7 @@ smml/                 # The main smml package
     getPitchEstimate.py # Finds the nearest match in a pitchData object
     getPitchExact.py    # Detects exact matches to pitches in a pitchData object
     pitchData.json      # A pre-generated pitchData object around A440
+    process.py          # A method dealing with FFT and Volume calculations
   markup/             # Subpackage for handling reading and writing SMML
     __init__.py         # Initializes the subpackage
     read.py             # Read SMML and returning a cleaned-up string
@@ -51,7 +52,39 @@ smml/                 # The main smml package
 ```python
 > dir(smml.audiofunc)
 
-foo
+[
+  '__builtins__',
+  ...,
+  'audioSetup',
+  'genPitch',
+  'getPitchEstimate',
+  'getPitchExact',
+  'pitchData',
+  'process'
+]
+```
+
+```
+audioSetup(callback, args=default_options)
+
+default_options = {
+    'type': 'live',
+    'file': '-',
+    'sample_rate': 8000,
+    'frames_rate': 30,
+}
+
+Creates an object that reads audio data as frames and processes the data
+as specified in "callback." Can read microphone input ('type': 'live') at
+any standard sample rate, and can read audio files ('type': 'file') at the
+sample rate in which the file is encoded. The 'file' option specifies the
+audio file to read, and is ignored when reading microphone input. The
+'frames_rate' option specifies the rate at which the computer should output
+data, controlling how much data it reads before processing a frame.
+
+Reads audio data frame by frame in a loop that repeats until a stop signal
+is received: KeyboardInterrupt for microphone input, EOF for audio file.
+Returns 1 on successful completion.
 ```
 
 ```
@@ -83,6 +116,29 @@ then finds the corresponding pitch at that index, then checks that this
 frequency and pitch are a matched pair of values.
 
 If "freq" is not contained in the generated pitchData object, returns None.
+```
+
+```
+process(numbers, gate=10, args=default_options)
+
+default_options = {
+    'type': 'live',
+    'file': '-',
+    'sample_rate': 8000,
+    'frames_rate': 30,
+}
+
+Processes "numbers" (must be an np.ndarray), as produced by
+smml.audiofunc.audioSetup(), to determine the dominant frequency and a
+rough measure of volume. Uses a Fast Fourier Transformation to determine
+the frequency, and sums the amplitude of the waveform to estimate volume.
+
+Must be supplied with a noise gate (defaults to 10, can be 0 for purest
+audio) which is used to adjust the waveform, primarily to reduce background
+noise. Must also be supplied with a dictionary of options, as the frame rate
+is a necessary conversion factor for the FFT Algorithm.
+
+Returns the extract frequency and estimated volume.
 ```
 
 ##### `markup/`
