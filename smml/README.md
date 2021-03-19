@@ -193,3 +193,83 @@ at index 0 and all expected pitches in the following indices.
 generate an HTML-based sheet music display. This mode is currently
 underdeveloped.
 ```
+
+##### `nodeio`
+```python
+> dir(smml.markup)
+
+[
+  '__builtins__',
+  ...,
+  'output',
+]
+```
+
+```
+output(text)
+
+Outputs given "text" as an individual data package readable by NodeJS (among
+others). Text must be given in a JSON serializable. Output will flush stdin
+after each package so that receiving scripts immediately detect the line.
+```
+
+##### `track`
+```
+track(text, callback, a4=440 args=default_options)
+
+default_options = {
+    'type': 'live',
+    'file': '-',
+    'sample_rate': 8000,
+    'frames_rate': 30,
+}
+
+The function that puts it all together.
+
+Given "text," a string of HTML/SMML, processes that text to a tree of nodes
+(smml.markup.read and smml.markup.smmlprocess). Then creates an
+audio-listening loop (smml.audiofunc.audioSetup) with the options specified
+in "args." The audio loop callback processes the waveform to a frequency
+and a pitch around a4 and compares that frequency to the node tree,
+determining when the next node in a piece is reached. At this moment, the
+node identifier, as well as the detected pitch, are passed to the specified
+"callback."
+
+Note that "track" operates only on the first SMML fragment detected in
+"text," so if multiple "music" tags appear in an HTML file, the parent
+script must select which tag to send to "track."
+
+Note also that, as the function can detect only one dominant pitch at a
+time, a single pitch in a chord triggers the detection of that node. This
+offers some room for human error, but also makes the program marginally
+fallible.
+
+Parameters
+----------
+text : string
+    Text data containing the SMML to be audio-tracked. Tracks only the first
+    SMML object detected (the first "<music>" tag)
+
+callback : function
+    The callback function called each time a node is detected.
+
+a4 : int or float
+    The numerical value of the frequency that should be used to generate a
+    pitchData object. Using A440 as a standard.
+
+args : dictionary
+    A dictionary of options, passed to the options argument of "audioSetup."
+
+Passes
+------
+node : list
+    Information about the detected node, passed to "callback" the instant
+    that node is detected. Contains a string (index 0) identifying the node
+    and a list (index 1) that specifies detected pitch and error measure.
+
+Returns
+-------
+state : integer
+    Returns the "state" integer returned by "audioSetup" -- returns 1
+    when the audio loop completes successfully.
+```

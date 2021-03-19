@@ -48,6 +48,10 @@ def process(numbers, gate=10, args=default_options):
         else:
             raise ValueError('Unexpected Option Provided: {}'.format(arg))
 
+    # Check that "numbers" is given as a numpy array
+    if type(numbers) is not np.ndarray:
+        raise TypeError('"numbers" argument is not of type numpy.ndarray')
+
     # Implement Noise Gate and Approximate Volume
     adjusted = numbers * (numbers > gate) # implement noise gate
     vol_adj = sum(abs(adjusted))    # approximate volume using amplitude
