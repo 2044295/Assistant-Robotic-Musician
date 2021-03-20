@@ -66,9 +66,9 @@ problems, and any other relevant information. These file include:
 Requirements:
 
 - A working installation of `python3`
-- The following standard packages: `sys`, `argparse`, `json`, `wave,`,
-  `audioop`, `numpy`, and `time`
-- The following additional packages: `pyaudio` and `soundfile`
+- The following standard packages: `sys`, `argparse`, `json`,`curses`, `time`,
+  `wave,`, `re` (regex), and `numpy`
+- The following additional packages: `pyaudio`
 
 01. `01_NodePy`: A Python3 and a NodeJS pair for using Python within the app
     - Demonstrates a variety of functions, from running python one-liners, to
@@ -98,6 +98,11 @@ Requirements:
         - Could overwrite the data array each time, rather than printing anew
         - <https://docs.python.org/3/howto/curses.html>
         - [Curses Usage - StackOverflow][StackOverflow Curses]
+04. `04_PitchFreq`: A Python3, JSON, and NodeJS trio for processing frequencies
+    - Python creates the JSON database of discrete pitches and frequencies
+    - NodeJS defines the functions that match frequencies to pitches
+    - Also includes Python3 definition of these functions
+    - Uses A440 tuning -- not adjustable, for simplicity
 
 Issues with `03_smmlAudio.py`: Samples `-3` and `-5` complain about using the
 `curses` module for display. The error seems to be that the program eventually
@@ -117,6 +122,9 @@ two-way or only one way, support will have to be developed and tested.
 [StackOverflow FFT]: https://stackoverflow.com/questions/2648151/python-frequency-detection
 [FFT Tone]: https://medium.com/@anht_59851/tone-frequency-detection-from-an-audio-file-by-python-44d673f2e26b
 [StackOverflow Curses]: https://stackoverflow.com/questions/6840420/rewrite-multiple-lines-in-the-console
+
+##### Package Architecture
+- Would like to make the Python3
 
 ##### More on Audio Processing and Fourier Transformations
 - A Simple Example: [Basic Frequency - StackOverflow][StackOverflow FFT]
