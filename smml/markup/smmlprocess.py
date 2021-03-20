@@ -21,7 +21,6 @@ keysigs = {
     'C-': ['B-', 'E-', 'A-', 'D-', 'G-', 'C-', 'F-'],
 }
 default_options = {
-    'mode': 'player',
     'time': '4/4',
     'meter': 'simple',
     'key': 'C',
@@ -75,7 +74,7 @@ def interpret_section(n, data, container):
     # everything checks out -- return as normal
     return(n, section)
 
-# Interpret an encountered measure object                                       # needs display upgrade (save data + options)
+# Interpret an encountered measure object
 def interpret_measure(i, data, options, container):
     # "skip" signal
     if data == '':
@@ -87,10 +86,10 @@ def interpret_measure(i, data, options, container):
     tag = data[tag_start:]
     tag = tag[:tag.find('>') + 1]
     measure = data[tag_start + len(tag):] # note that ungrouped data is dropped
-    container.append(tag)
-    container.append(measure)
+    container.append(data[:tag_start]) # save necessary ungrouped data
+    container.append(tag) # save the tag for reference
 
-    # extract options from the tag                                              # needs display upgrade
+    # extract options from the tag
     new_options = re.search(' options=[\"\']\{.*\}[\"\'][ >]', tag)
     if new_options is not None:
         new_options = new_options[0][10:-2]
@@ -136,6 +135,9 @@ def interpret_measure(i, data, options, container):
             else:
                 options[option] = new_options[option] # update option
 
+    container.append(options.copy()) # write options to container -- for display
+                                     # to recognize new measure with all options
+
     # process options
     number = options['number']
     if number == 'auto':
@@ -147,14 +149,13 @@ def interpret_measure(i, data, options, container):
 
     # SOMETHING TO DO WITH GROUPING
 
-    # and last but not least, return all the processed data                     # needs display upgrade
+    # and last but not least, return all the processed data
     return(i, measure, options)
 
 # Interpret encoded note data -- relevant to player and displayer               # needs display upgrade (save name + options)
 def interpret_note(i, j, data, options, container):
     # "skip" signal
     if data == '':
-        container.append('')
         return(i, j, []) # an empty list in the node just gets skipped
 
     # extract the note and tag data
@@ -162,7 +163,6 @@ def interpret_note(i, j, data, options, container):
     tag = data[tag_start:]
     tag = tag[:tag.find('>') + 1]
     note = data[tag_start + len(tag):] # note that ungrouped data is dropped
-    container.append(note)
 
     # try to extract the data as full JSON, esle use shorthand                  # needs display upgrade
     note_data = re.search('\{.*\}', tag)
@@ -183,7 +183,7 @@ def interpret_note(i, j, data, options, container):
     else:
         num, denom = int(beat), 1
 
-    # checking that format is as expected                                       # needs display upgrade
+    # checking that format is as expected
     if re.fullmatch('[A-G][0-9][+|-]*', pitch) is None:
         print('Error: Invalid Pitch Detected: {}'.format(pitch))
         return(i, j, [])
@@ -196,7 +196,7 @@ def interpret_note(i, j, data, options, container):
         print('Error: Beat Value Too Large: {}'.format(beat))
         return(i, j, [])
 
-    # get the expected pitch                                                    # maybe add a note "name"?
+    # get the expected pitch
     pitch_base = pitch[0:2]
     if len(pitch) > 2:
         pitch_acc = pitch[2:]
@@ -212,14 +212,17 @@ def interpret_note(i, j, data, options, container):
     # figure out the "node" of the note
     if num/denom < j:
         i[0] += 1 # next measure
+        container.append(options.copy()) # write options to container --
+                                         # to recognize new measure
 
     j = num/denom
 
     node = '{}.{}'.format(i[0], beat)
 
-    return(i, j, [node, pitch])                                                 # needs display upgrade
+    container.append(note)
+    return(i, j, [node, pitch])
 
-# Cleans up the program output -- relevant to player and displayer              # needs display upgrade
+# Cleans up the program output -- relevant to player and displayer
 def cleanup(nodes):
     cleaned_nodes = []
 
@@ -241,10 +244,12 @@ def cleanup(nodes):
     # then, loop over the object to recursively clean it up
     for i, item in enumerate(nodes):
         if type(item) is list:
+            item = cleanup(item)
             if item != []:
-                cleaned_nodes.append(cleanup(item))
+                cleaned_nodes.append(item)
         else:
-            cleaned_nodes.append(item)
+            if item != '':
+                cleaned_nodes.append(item)
 
     return(cleaned_nodes)
 
@@ -271,8 +276,6 @@ def smmlprocess(text, mode='player'):
 
     if mode not in ['player', 'display']:
         raise ValueError('Unexpected processing mode found: {}'.format(mode))
-
-    default_options['mode'] = mode
 
     # Starting from the top
     grouping = False
@@ -325,6 +328,7 @@ def smmlprocess(text, mode='player'):
         if music != '':
             music_nodes.append(temp_node)
 
+    container = cleanup(container)
     music_nodes = cleanup(music_nodes)
 
     if mode == 'display':

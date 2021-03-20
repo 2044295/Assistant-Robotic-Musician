@@ -1,0 +1,19 @@
+{
+  "name": "assistantroboticmusician",
+  "version": "1.0.0",
+  "description": "Assistant Robotic Musician",
+  "main": "main.js",
+  "dependencies": {
+    "nativefier": "^43.0.0",
+    "python-shell": "^2.0.3",
+    "vexflow": "^3.0.9"
+  },
+  "devDependencies": {
+    "electron": "^11.3.0"
+  },
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Evan Keeton and Saketh Sitaram",
+  "license": "ISC"
+}
