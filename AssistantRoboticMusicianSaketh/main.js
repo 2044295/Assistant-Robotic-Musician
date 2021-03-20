@@ -1,10 +1,10 @@
-const electron = require('electron')
 const { app, BrowserWindow } = require('electron')
-function createWindow () {
+const PythonShell = require('python-shell').PythonShell;
 
+function createWindow () {
   const win = new BrowserWindow({
-    width: 1000,
-    height: 800,
+    width: 1440,
+    height: 900,
     webPreferences: {
       nodeIntegration: true
     }
@@ -12,6 +12,23 @@ function createWindow () {
 
   win.loadFile('0landingpage.html')
 }
+
+function loadFile(filename) {
+  let options = {args: [filename], mode: 'json'}
+  let pyshell = new PythonShell('scripts/file_load.py', options);
+  pyshell.on('message', (message) => {
+    console.log(message);
+  });
+}
+
+function trackFile(filename) {
+  let options = {args: [filename], mode: 'json'}
+  let pyshell = new PythonShell('scripts/file_track.py', options);
+  pyshell.on('message', (message) => {
+    console.log(message);
+  });
+}
+
 app.whenReady().then(createWindow)
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
