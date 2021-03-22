@@ -1,0 +1,28 @@
+<html>
+<div id="foo"></div>
+
+<script src="https://unpkg.com/vexflow/releases/vexflow-debug.js"></script>
+
+<script>
+
+var vf = new Vex.Flow.Factory({renderer: {elementId: 'foo'}});
+var score = vf.EasyScore();
+var system = vf.System();
+
+var x = 120;
+var y = 80;
+function makeSystem(width) {
+  var system = vf.System({ x: x, y: y, width: width,});
+  x += width;
+  return system;}
+
+  var system = makeSystem(400);
+  system.addStave({
+    voices: [score.voice(score.notes('C#5/q, B4, A4, G#4'))]
+  }).addClef('treble').addTimeSignature('4/4');
+
+  vf.draw();
+
+
+</script>
+<html>
