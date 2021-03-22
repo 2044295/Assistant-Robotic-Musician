@@ -5,24 +5,57 @@
 
 <script>
 
-var vf = new Vex.Flow.Factory({renderer: {elementId: 'foo'}});
-var score = vf.EasyScore();
-var system = vf.System();
 
-var x = 120;
-var y = 80;
+var vf = new Vex.Flow.Factory({renderer: {elementId: "foo", width: 100000, height: 10000}});
+var score = vf.EasyScore();
+
+var x = 10;
+var y = 0;
 function makeSystem(width) {
   var system = vf.System({ x: x, y: y, width: width,});
   x += width;
   return system;}
 
+  score.set({ time: '5/4' });
+
   var system = makeSystem(400);
   system.addStave({
-    voices: [score.voice(score.notes('C#5/q, B4, A4, G#4'))]
-  }).addClef('treble').addTimeSignature('4/4');
+    voices: [score.voice(score.notes('C#5/q, B4, A4, G#4, F#4'))]
+  }).addClef('treble').addKeySignature("G").addTimeSignature('5/4');
+
+  vf.draw();
+  system.addConnector();
+
+  var system = makeSystem(400);
+  system.addStave({
+    voices: [score.voice(score.notes('C#5/q, B4, A4, F#4, F4'))]
+  });
 
   vf.draw();
 
+  var system = makeSystem(400);
+  system.addStave({
+    voices: [score.voice(score.notes('C#5/q')
+    .concat(score.beam(score.notes('B4/8, A4, G4, F#4', {stem: 'down'})))
+    .concat(score.notes('A4/q, C5/q/r')))]
+  });
 
+  vf.draw();
+
+  var system = makeSystem(400);
+  system.addStave({
+    voices: [score.voice(score.notes('C#5/q')
+    .concat(score.beam(score.notes('B4/8, A4, G4, F#4', {stem: 'down'})))
+    .concat(score.notes('A4/q, C5/q/r')))]
+  });
+
+  vf.draw();
+
+  var system = vf.System({ x: x, y: 300, width: 400});
+  system.addStave({
+  voices: [score.voice(score.notes('C#5/q, B4, A4, F#4, F4'))]
+});
+
+  vf.draw();
 </script>
 <html>
