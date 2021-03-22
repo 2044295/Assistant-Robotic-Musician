@@ -14,6 +14,11 @@
   Together, we hope to ease the process of performing with sheet music by
   removing distractions and difficulties in handling the music.
 
+# Things to Do
+- Formalize `smml` package
+    - <https://packaging.python.org/tutorials/packaging-projects/>
+- Create an installation guide
+- Clean up the README
 
 ### About This Repository
 This repository contains the online presence of the Assistant Robotic Musician,

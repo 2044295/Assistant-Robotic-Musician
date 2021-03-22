@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const PythonShell = require('python-shell').PythonShell;
 
 function createWindow () {
@@ -11,18 +11,19 @@ function createWindow () {
   })
 
   win.loadFile('assets/html/0landingpage.html');
-  loadSMML('samples/sampleBach.html'); // replace with communication with play page
-  trackSMML('samples/sampleSimple.html'); // replace with communication with play page
-  console.log('Testing asynchronous functionality - it works');
-}
-
-// This function fully works
-function loadSMML(filename) {
-  let options = {args: [filename], mode: 'json'}
-  let pyshell = new PythonShell('./assets/scripts/file_load.py', options);
-  pyshell.on('message', (message) => {
-    console.log(message); // replace with communication with play page
-  });
+  ipcMain.on('asynchronous-message', (event, arg) => {                          // https://www.electronjs.org/docs/api/ipc-main
+    if (arg == "home") { win.loadFile('assets/html/0landingpage.html'); }
+    if (arg == "newfile") { win.loadFile('assets/html/1editpage.html'); }
+    if (arg == "playpage") { win.loadFile('assets/html/2playpage.html'); }
+    if (arg == "loadfile") {
+      let options = {args: ['samples/sampleSimple.smml'], mode: 'json'}         // will need to be customizable later
+      let pyshell = new PythonShell('./assets/scripts/file_track.py', options);
+      pyshell.on('message', (message) => {
+        win.webContents.send('new_node', message);                              // broken somehow -- https://www.electronjs.org/docs/api/web-contents#contentssendchannel-args
+      });
+    }
+    event.returnValue = 1;
+  })
 }
 
 // This function (trackFile) fully works -- it's up to Saketh to implement -- I'm realizing we'll need error handling
@@ -32,7 +33,7 @@ function trackSMML(filename) {
   let options = {args: [filename], mode: 'json'}
   let pyshell = new PythonShell('./assets/scripts/file_track.py', options);
   pyshell.on('message', (message) => {
-    console.log(message); // replace with communication with play page
+    win.webContents.send('new_node', message);
   });
 }
 

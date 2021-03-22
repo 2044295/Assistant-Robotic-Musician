@@ -9,7 +9,6 @@ body {
   font-family: 'Nunito Sans', sans-serif;
 }
 
-
 .landp {
     height: auto;
     width: auto;
@@ -21,24 +20,27 @@ body {
     margin-left: -200px;
 }
 
-.landp a {
+.landp button {
     font-size: 30px;
     border: none;
     outline: none;
     color: black;
     padding: 14px 30px;
-    background-color: inherit;
+    background-color: #eeeeee;
     font-family: inherit;
     margin: 0;
     text-decoration: none;
 }
 
+.landp button:hover {
+  background-color: #dedede;
+}
 </style>
 </head>
 <body>
     <div class="landp">
-      <a href="assets/html/1editpage.html">New File</a>
-      <a>Recent Files</a>
-      <a href="assets/html/2playpage.html">Load File</a>
+      <button type="button" onclick="newfile()">New File</button>
+      <button type="button" onclick="playpage()">Open File</a>
     </div>
+    <script src="../scripts/index.js"></script>
 </body>

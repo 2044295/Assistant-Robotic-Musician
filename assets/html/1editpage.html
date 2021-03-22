@@ -4,179 +4,182 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
 <style>
-body {
-  background-color: #dedede;
-  font-family: 'Nunito Sans', sans-serif;
-}
+  body {
+    background-color: #dedede;
+    font-family: 'Nunito Sans', sans-serif;
+  }
 
-.topnav {
-  background-color: gray;
-  overflow: hidden;
-}
+  .topnav {
+    background-color: gray;
+    overflow: hidden;
+  }
 
-.navbar {
-  background-color: #dedede;
-  overflow: hidden;
-  margin-left: 20%;
-}
+  .navbar {
+    background-color: #dedede;
+    overflow: hidden;
+    margin-left: 20%;
+  }
 
-.topnav a {
-  float: left;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 16px;
-}
+  .topnav a, button {
+    float: left;
+    color: white;
+    border: none;
+    background: inherit;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 16px;
+  }
 
-.navbar a {
-  float: left;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 16px;
-}
-.topnav a:hover {
-  background-color: #999999;
-  color: black;
-}
+  .navbar a, button {
+    float: left;
+    color: black;
+    border: none;
+    background: inherit;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  .topnav a:hover, button:hover {
+    background-color: #999999;
+    color: black;
+  }
 
-.topnav a.active {
-  background-color: #4CAF50;
-  color: white;
-}
+  .topnav a.active, button:hover {
+    background-color: #4CAF50;
+    color: white;
+  }
 
-.navbar a:hover {
-  background-color: #ddd;
-  color: black;
-}
+  .navbar a:hover, button:hover {
+    background-color: #ddd;
+    color: black;
+  }
 
-.navbar a.active {
-  background-color: #4CAF50;
-  color: white;
-}
+  .navbar a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
 
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
 
-.dropdown2 {
-  float: left;
-  overflow: hidden;
-}
+  .dropdown2 {
+    float: left;
+    overflow: hidden;
+  }
 
-.dropdown .dropbtn {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
+  .dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
 
-.dropdown2 .dropbtn2 {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: black;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
+  .dropdown2 .dropbtn2 {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
 
-.topnav a:hover, .dropdown:hover .dropbtn {
-  background-color: #c4c4c4;
-}
+  .topnav a:hover, button:hover, .dropdown:hover .dropbtn {
+    background-color: #c4c4c4;
+  }
 
-.navbar a:hover, .dropdown2:hover .dropbtn2 {
-  background-color: grey;
-}
+  .navbar a:hover, button:hover, .dropdown2:hover .dropbtn2 {
+    background-color: grey;
+  }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
 
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
+  .dropdown-content a, button {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
 
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
 
-.dropdown2:hover .dropdown-content {
-  display: block;
-}
+  .dropdown2:hover .dropdown-content {
+    display: block;
+  }
 
-.dropdown-submenu .dropdown-menu {
-  position: relative;
-}
+  .dropdown-submenu .dropdown-menu {
+    position: relative;
+  }
 
-.dropdown-submenu .dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -1px;
-}
+  .dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+  }
 
-.sidenav {
-  width: 130px;
-  padding-top: 10px;
-  z-index: 1;
-  margin-top: 70px;
-  left: 10;
-  background-color: #c4c4c4;
-  overflow-x: hidden;
-}
-
-
-.sidenav ul {
-  padding: 10px 10px 10px 10px;
-  text-decoration: none;
-  font-size: 17px;
-  color: black;
-  display: block;
-}
+  .sidenav {
+    width: 130px;
+    padding-top: 10px;
+    z-index: 1;
+    margin-top: 70px;
+    left: 10;
+    background-color: #c4c4c4;
+    overflow-x: hidden;
+  }
 
 
-.sidenav a:hover {
-  color: #c4c4c4;
-}
+  .sidenav ul {
+    padding: 10px 10px 10px 10px;
+    text-decoration: none;
+    font-size: 17px;
+    color: black;
+    display: block;
+  }
 
-.sheetmusic {
-  position:relative;
-  margin-left: 10%;
-  margin-top: -17.5%;
-  background-color: white;
-  width: 87.5%;
-  height: 0px;
-  padding-bottom: 45%;
-}
 
+  .sidenav a:hover, button:hover {
+    color: #c4c4c4;
+  }
+
+  .sheetmusic {
+    position:relative;
+    margin-left: 10%;
+    margin-top: -17.5%;
+    background-color: white;
+    width: 87.5%;
+    height: 0px;
+    padding-bottom: 45%;
+  }
 </style>
 </head>
 <body>
-
+<script src="../scripts/index.js"></script>
 <div class="topnav">
-  <a href="assets/html/0landingpage.html">Home</a>
+  <button onclick="gohome()">Home</button>
   <div class="dropdown">
     <button class="dropbtn">File</button>
     <div class="dropdown-content">
@@ -296,7 +299,7 @@ body {
       <a>Advanced Controls</a>
     </div>
   </div>
-  <a href="assets/html/2playpage.html">Go to Play</a>
+  <button onclick="playpage()">Go to Play</a>
 </div>
 
 <div class="sidenav">
@@ -349,7 +352,7 @@ body {
 </div>
 <div class="sheetmusic">
     <iframe style="position:absolute; left:0; top:0; width:100%; height:100%"
-        src="assets/html/MeasureDoc.html">
+        src="./MeasureDoc.html">
     </iframe>
 </div>
 </body>
