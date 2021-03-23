@@ -235,6 +235,7 @@ body {
     <button class="dropbtn2">Performance Controls
     </button>
     <div class="dropdown-content">
+      <button onclick="loadfile()">Load File</button>
       <a>Start Performance</a>
       <a>Pause Performance</a>
       <a>Stop Performance</a>
@@ -248,13 +249,13 @@ body {
         src="/assets/html/PlayMeasure.html">
     </iframe-->
 </div>
+<script src="../scripts/index.js"></script>
 <script>
-sheetmusic = document.getElementById("sheetmusic");
-sheetmusic.innerHTML = "foo bar";
-loadfile()
-ipcMain.on('new_node', (event, arg) => {
-  sheetmusic.innerHTML = "Hello world";
-})
+let jsobj;
+ipcRenderer.on('data', (event, arg) => {
+  jsobj = arg;
+  document.getElementById("sheetmusic").innerHTML = JSON.stringify(jsobj);      // demonstrates presence of arg
+});
 </script>
 
 </body>

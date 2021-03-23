@@ -12,14 +12,16 @@ function createWindow () {
 
   win.loadFile('assets/html/0landingpage.html');
   ipcMain.on('asynchronous-message', (event, arg) => {                          // https://www.electronjs.org/docs/api/ipc-main
+    console.log(arg);
     if (arg == "home") { win.loadFile('assets/html/0landingpage.html'); }
     if (arg == "newfile") { win.loadFile('assets/html/1editpage.html'); }
     if (arg == "playpage") { win.loadFile('assets/html/2playpage.html'); }
     if (arg == "loadfile") {
-      let options = {args: ['samples/sampleSimple.smml'], mode: 'json'}         // will need to be customizable later
-      let pyshell = new PythonShell('./assets/scripts/file_track.py', options);
+      let options = {args: ['samples/sampleSimple.html'], mode: 'json'}         // will need to be customizable later
+      let pyshell = new PythonShell('./assets/scripts/file_load.py', options);
       pyshell.on('message', (message) => {
-        win.webContents.send('new_node', message);                              // broken somehow -- https://www.electronjs.org/docs/api/web-contents#contentssendchannel-args
+        console.log(message);
+        win.webContents.send('data', message);                              // broken somehow -- https://www.electronjs.org/docs/api/web-contents#contentssendchannel-args
       });
     }
     event.returnValue = 1;
