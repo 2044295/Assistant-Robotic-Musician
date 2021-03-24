@@ -7,17 +7,20 @@
 body {
   background-color: #dedede;
   font-family: 'Nunito Sans', sans-serif;
+  text-align: center;
 }
 
 .landp {
     height: auto;
     width: auto;
     background: inherit;
-    position: fixed;
-    top: 53%;
-    left: 45%;
-    margin-top: -100px;
-    margin-left: -200px;
+    position: absolute;
+  	top:0;
+  	bottom: 0;
+  	left: 0;
+  	right: 0;
+
+  	margin: auto;
 }
 
 .landp button {
@@ -39,8 +42,8 @@ body {
 </head>
 <body>
     <div class="landp">
-      <button type="button" onclick="newfile()">New File</button>
-      <button type="button" onclick="playpage()">Open File</a>
+      <button type="button" onclick="newFile()">New File</button>
+      <button type="button" onclick="playPage()">Open File</a>
     </div>
     <script src="../scripts/index.js"></script>
 </body>

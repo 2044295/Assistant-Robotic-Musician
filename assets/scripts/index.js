@@ -1,5 +1,6 @@
 const { ipcRenderer } = require('electron');
-function gohome() { ipcRenderer.send('asynchronous-message', 'home'); }
-function newfile() { ipcRenderer.send('asynchronous-message', 'newfile'); }
-function playpage() { ipcRenderer.send('asynchronous-message', 'playpage'); }
-function loadfile() { ipcRenderer.send('asynchronous-message', 'loadfile'); }
+function goHome() { ipcRenderer.send('load-page', 'home'); }
+function newFile() { ipcRenderer.send('load-page', 'newFile'); }
+function playPage() { ipcRenderer.send('load-page', 'playPage'); }
+function loadFile(filename) { ipcRenderer.send('loadFile', filename); }
+function trackFile(filename) { ipcRenderer.send('trackFile', filename); }
