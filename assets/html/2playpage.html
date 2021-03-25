@@ -240,7 +240,7 @@ body {
     </button>
     <div class="dropdown-content">
       <button onclick="loadFile('samples/sampleSimple.html')">Load File</button>
-      <a>Start Performance</a>
+      <button onclick="trackFile('samples/sampleSimple.html');">Start Performance</button>
       <a>Pause Performance</a>
       <a>Stop Performance</a>
     </div>
@@ -254,17 +254,17 @@ body {
     </iframe-->
 </div>
 <script src="../scripts/index.js"></script>
+<script src="https://unpkg.com/vexflow/releases/vexflow-debug.js"></script>
 <script>
+let divarray = [];
 
-function jsfull(jsmusobj) {
-  var musparsed = JSON.parse(jsmusobj);
-  divarray = [];
+function jsfull(musparsed) {
   var jsfunc = function jsmeasure(count, idname, displaytype) {
     g = document.createElement('div');
     g.id = (idname);
-    document.body.appendChild(g);
+    document.getElementById('sheetmusic').appendChild(g);
     document.getElementById(idname).style.display = displaytype;
-    var vf = new Vex.Flow.Factory({renderer: {elementId: idname, width: 1700, height: 100}});
+    var vf = new Vex.Flow.Factory({renderer: {elementId: idname, width: 1200, height: 100}}); // need to make fully customizable
     var score = vf.EasyScore();
     var x = 10;
     var y = 0;
@@ -277,7 +277,7 @@ function jsfull(jsmusobj) {
     var jsthingfunc = function jsthing() {
         for (i in jsarr) {
           if (typeof(jsarr[i]) == "object") {
-            var system = makeSystem(400);
+            var system = makeSystem(290);
             var staveadd = system.addStave({
               voices: [score.voice(score.notes('C5/q, C4, G4, D5'))]
             }).addClef("treble").addKeySignature(jsarr[i].key).addTimeSignature(jsarr[i].time);
@@ -286,7 +286,7 @@ function jsfull(jsmusobj) {
             var pagenum = count/4;
             delete jsarr[i];
             if (pagenum === 1) {
-              jsfunc(4, "boo2", 'none');
+              jsfunc(4, "boo2", 'none');                                        // need to improve recursive functionality
               break;
             }
       };
@@ -297,36 +297,25 @@ function jsfull(jsmusobj) {
   jsfunc(0, "boo", 'block');
 }
 
-function nextpage(array) {
-  for (i in array) {
-    if (array[i].style.display != "none") {
-      var pagecount = parseInt(i) + 1;
-      array[i].style.display = "none";
-      array[pagecount].style.display = "block";
-      break;
+function showpage(intfoo) {
+  for (i in divarray) {
+    if (parseInt(i) != intfoo) {
+      divarray[i].style.display = "none";
+    } else {
+      divarray[i].style.display = "block";
     }
   }
 }
 
-let jsobj;
-trackFile('samples/sampleSimple.html');
-ipcRenderer.on('data', (event, arg) => {
-  jsobj = arg;
+ipcRenderer.on('data', (event, jsobj) => {
   jsfull(jsobj);     // demonstrates presence of arg
 });
 ipcRenderer.on('new_node', (event, arg) => {
   var jsval = arg[0];
   var valarr = jsval.split(".");
-  var varint = parseInt(valarr);
-  var pageint = Math.floor(varint);
-  function nextpage(intfoo, array) {
-    for (i in array) {
-      if (parseInt(i) != intfoo) {
-        array[i].style.display = "none";
-      }
-    }
-    array[pageint].style.display = "block";
-  }    // demonstrates presence of arg
+  var varint = parseInt(valarr[0]);
+  var pageint = Math.floor(varint/4);
+  showpage(pageint);
 });
 </script>
 
