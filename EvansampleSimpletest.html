@@ -1,8 +1,16 @@
-<button onclick = "jsthing()">Try</button>
+<head>
+</head>
+
+<body onload = "jsfull(musobj)">
+
+<button onclick = "nextpage(divarray)">Next Page</button>
+
+<script src="https://unpkg.com/vexflow/releases/vexflow-debug.js"></script>
 
 <script>
-var jsobj = JSON.parse(
-  "[[\"<!DOCTYPE html><body>\",\
+
+
+var musobj = "[[\"<!DOCTYPE html><body>\",\
       \"<section>\",\
       \"<!--now with some notes (default C Major, 4/4)-->\",\
       \"<measure>\",\
@@ -29,10 +37,60 @@ var jsobj = JSON.parse(
       \"B3, 2, 1\",\
       \"C4+, 3, 1\",\
       {\"time\": \"3/4\", \"meter\": \"simple\", \"key\": \"D\", \"number\": \"3:5\", \"grouping\": \"n/a\", \"other\": {\"placement\": \"-X-\"}},\
-      \"D4, 1, 1\"]]"
-);
+      \"D4, 1, 1\"]]";
 
-function jsthing() {
-  console.log(jsobj[0][5]);
+function jsfull(jsmusobj) {
+  var musparsed = JSON.parse(jsmusobj);
+  divarray = [];
+  var jsfunc = function jsmeasure(count, idname, displaytype) {
+    g = document.createElement('div');
+    g.id = (idname);
+    document.body.appendChild(g);
+    document.getElementById(idname).style.display = displaytype;
+    var vf = new Vex.Flow.Factory({renderer: {elementId: idname, width: 1700, height: 100}});
+    var score = vf.EasyScore();
+    var x = 10;
+    var y = 0;
+    function makeSystem(width) {
+      var system = vf.System({ x: x, y: y, width: width,});
+      x += width;
+      return system;};
+    divarray.push(g);
+    var jsarr = musparsed[0];
+    var jsthingfunc = function jsthing() {
+        for (i in jsarr) {
+          if (typeof(jsarr[i]) == "object") {
+            var system = makeSystem(400);
+            var staveadd = system.addStave({
+              voices: [score.voice(score.notes('C5/q, C4, G4, D5'))]
+            }).addClef("treble").addKeySignature(jsarr[i].key).addTimeSignature(jsarr[i].time);
+            vf.draw();
+            count += 1;
+            var pagenum = count/4;
+            delete jsarr[i];
+            if (pagenum === 1) {
+              jsfunc(4, "boo2", 'none');
+              break;
+            }
+      };
+    };
+    };
+    jsthingfunc();
+  };
+  jsfunc(0, "boo", 'block');
+}
+
+function nextpage(array) {
+  for (i in array) {
+    if (array[i].style.display != "none") {
+      var pagecount = parseInt(i) + 1;
+      array[i].style.display = "none";
+      array[pagecount].style.display = "block";
+      break;
+    }
+  }
 }
 </script>
+
+
+</body>

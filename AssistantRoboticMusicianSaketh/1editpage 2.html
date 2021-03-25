@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
+<style>
+body {
+  background-color: #dedede;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.topnav {
+  background-color: gray;
+  overflow: hidden;
+}
+
+.navbar {
+  background-color: #dedede;
+  overflow: hidden;
+  margin-left: 20%;
+}
+
+.topnav a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.navbar a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 16px;
+}
+.topnav a:hover {
+  background-color: #999999;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.navbar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown2 {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown2 .dropbtn2 {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: black;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.topnav a:hover, .dropdown:hover .dropbtn {
+  background-color: #c4c4c4;
+}
+
+.navbar a:hover, .dropdown2:hover .dropbtn2 {
+  background-color: grey;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown2:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-submenu .dropdown-menu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+}
+
+.sidenav {
+  width: 130px;
+  padding-top: 10px;
+  z-index: 1;
+  margin-top: 70px;
+  left: 10;
+  background-color: #c4c4c4;
+  overflow-x: hidden;
+}
+
+
+.sidenav ul {
+  padding: 10px 10px 10px 10px;
+  text-decoration: none;
+  font-size: 17px;
+  color: black;
+  display: block;
+}
+
+
+.sidenav a:hover {
+  color: #c4c4c4;
+}
+
+.sheetmusic {
+  position:relative;
+  margin-left: 10%;
+  margin-top: -17.5%;
+  background-color: white;
+  width: 87.5%;
+  height: 0px;
+  padding-bottom: 45%;
+}
+
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a href="0landingpage.html">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn">File</button>
+    <div class="dropdown-content">
+      <a>Save</a>
+      <a>Save As</a>
+      <a>Duplicate</a>
+      <a>Export as File</a>
+      <a>Export as Audio</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">Edit
+    </button>
+    <div class="dropdown-content">
+      <a>Undo</a>
+      <a>Redo</a>
+      <a>Select</a>
+      <a>Find</a>
+      <a>Copy</a>
+      <a>Cut</a>
+      <a>Paste</a>
+      <a>Delete</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">View
+    </button>
+    <div class="dropdown-content">
+      <a>Zoom</a>
+      <a>Page Margins</a>
+      <a>Select</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">Calibrate
+    </button>
+  </div>
+</div>
+
+<br />
+<br />
+
+<div class="navbar">
+  <div class="dropdown2">
+    <button class="dropbtn2">Add Measure</button>
+    <div class="dropdown-content">
+      <a>Add One Measure</a>
+      <a>Add More Measures</a>
+    </div>
+  </div>
+  <div class="dropdown2">
+    <button class="dropbtn2">Measures</button>
+    <div class="dropdown-content">
+      <a>Remove Measure</a>
+      <a>Copy Measure(s)</a>
+      <a>Paste Selection</a>
+    </div>
+  </div>
+  <a>Add Section</a>
+  <div class="dropdown2">
+    <button class="dropbtn2">Section
+    </button>
+    <div class="dropdown-content">
+      <a>Remove Section</a>
+      <a>Copy Section(s)</a>
+      <a>Paste Selection</a>
+    </div>
+  </div>
+  <div class="dropdown2">
+    <button class="dropbtn2">Add Note</button>
+    <div class="dropdown-content">
+      <a>32nd Note</a>
+      <a>16th Note</a>
+      <a>8th Note</a>
+      <a>Quarter Note</a>
+      <a>Half Note</a>
+      <a>Whole Note</a>
+    </div>
+  </div>
+  <div class="dropdown2">
+    <button class="dropbtn2">Note
+    </button>
+    <div class="dropdown-content">
+      <a>Remove Note</a>
+      <a>Copy Note(s)</a>
+      <a>Paste Selection</a>
+    </div>
+  </div>
+  <div class="dropdown2">
+    <button class="dropbtn2">Add Rest</button>
+    <div class="dropdown-content">
+      <a>32nd Rest</a>
+      <a>16th Rest</a>
+      <a>8th Rest</a>
+      <a>Quarter Rest</a>
+      <a>Half Rest</a>
+      <a>Whole Rest</a>
+    </div>
+  </div>
+  <div class="dropdown2">
+    <button class="dropbtn2">Rest
+    </button>
+    <div class="dropdown-content">
+      <a>Remove Rest</a>
+      <a>Copy Rest(s)</a>
+      <a>Paste Selection</a>
+    </div>
+  </div>
+  <div class="dropdown2">
+    <button class="dropbtn2">Playback Controls
+    </button>
+    <div class="dropdown-content">
+      <a>Play</a>
+      <a>Pause</a>
+      <a>Go to Measure</a>
+      <a>Go to Section</a>
+      <a>Advanced Controls</a>
+    </div>
+  </div>
+  <a href="2playpage.html">Go to Play</a>
+</div>
+
+<div class="sidenav">
+  <div class="dropdown2">
+    <button class="dropbtn2">Measure
+    </button>
+    <div class="dropdown-content">
+      <a>Key Signature</a>
+      <a>Time Signature</a>
+    </div>
+  </div>
+  <div class="dropdown2">
+    <button class="dropbtn2">Accidental
+    </button>
+    <div class="dropdown-content">
+      <a>♭</a>
+      <a>♯</a>
+      <a>♮</a>
+      <a>Remove Accidental</a>
+    </div>
+  </div>
+  <div class="dropdown2">
+    <button class="dropbtn2">Staccato
+    </button>
+    <div class="dropdown-content">
+      <a>Add</a>
+      <a>Remove</a>
+    </div>
+  </div>
+  <div class="dropdown2">
+    <button class="dropbtn2">Dot
+    </button>
+    <div class="dropdown-content">
+      <a>Add</a>
+      <a>Remove</a>
+    </div>
+  </div>
+  <div class="dropdown2">
+    <button class="dropbtn2">Tuplet
+    </button>
+    <div class="dropdown-content">
+      <a>3</a>
+      <a>4</a>
+      <a>5</a>
+      <a>6</a>
+      <a>7</a>
+      <a>Remove Tuplet</a>
+    </div>
+  </div>
+</div>
+<div class="sheetmusic">
+    <iframe style="position:absolute; left:0; top:0; width:100%; height:100%"
+        src="measuredoc.html">
+    </iframe>
+</div>
+</body>
+</html>
