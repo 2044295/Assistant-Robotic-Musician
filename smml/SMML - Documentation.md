@@ -112,7 +112,7 @@ div.jazz {
 - `<measure></measure>` creates a `measure` object, with certain properties:
 
 ```
-<measure options="<OPTIONS>"></measure>s
+<measure options="<OPTIONS>"></measure>
 
 options: {
   'time': '4/4',
@@ -176,6 +176,18 @@ options: {
   the organization of the piece: all structural organization occurs via numbers
   or identifiers (but `div`s may be used for writer clarity of mind)
 
+### Voice Parts
+```
+<voice type="lower/upper">
+CONTENT
+</voice>
+```
+
+- Optional notation to separate different voice parts
+- Unless voice part is explicitly specified, notes are all assumed to be part of
+  the same voice part
+- Must specify "lower" or "upper"
+
 ### Notes
 - Note objects are created with `<note></note>`---comparable to `<p></p>`
 - Although the connection between musical notes and SMML notes is tenuous at
@@ -210,6 +222,8 @@ options: {
         - Accidental notes that match the specified key signature have their
           accidental dropped when SMML is displayed
     - Microtones are indicated with `+` or `-` an integer or a float, in cents
+- To indicate a rest: `{pitch: 'N/A'}` -- indicates silence for the duration
+  specified by the remaining properties
 - The current version of SMML does not support multiple voices or multi-staff
   instruments (such as the piano)
 

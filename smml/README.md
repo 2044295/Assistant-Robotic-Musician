@@ -17,8 +17,7 @@ smml/                 # The main smml package
     process.py          # A method dealing with FFT and Volume calculations
   markup/             # Subpackage for handling reading and writing SMML
     __init__.py         # Initializes the subpackage
-    read.py             # Read SMML and returning a cleaned-up string
-    smmlprocess.py      # Process an SMML string to time-pitch nodes
+    process.py          # Process an SMML string to time-pitch nodes
   nodeio.py           # Methods handling NodeJS I/O
   track.py            # Putting it all together into a single function
 ```
@@ -158,28 +157,12 @@ Returns the extract frequency and estimated volume.
 ```
 
 ```
-read(text)
+process(text, mode='player')
 
-Reads a string of human-readable smml data and returns a machine-formatted
-smml string, containing only characters necessary for processing.
-
-text: string object
-
-Reads the string in one of three modes:
-- read mode, removing all whitespace
-  the default, highest-level mode
-- tag mode, reducing all whitespace to a single character
-  mid-level mode, contained between each '<' to the first following '>'
-- content mode, preserving without question all text (except newlines)
-  lowest-level mode, contained within each `note` tag
-```
-
-```
-smmlprocess(text, mode='player')
-
-Reads a machine-formatted smml string (see smml.markup.read) and processes
-the SMML-encoded data to a serialized JSON object. Provides output in one
-of two `modes`: 'player' or 'display'.
+Reads a machine-formatted smml string and processes the SMML-encoded data to a
+serialized JSON object. Provides output in one of two `modes`: 'player' or
+'display'. Recommended to manually strip newlines and whitespace from an smml
+string before calling `process`.
 
 'Player' output returns a JSON list of "nodes" that describes the expected
 pitch(es) at each such "node," a numerical marker of a certain position in

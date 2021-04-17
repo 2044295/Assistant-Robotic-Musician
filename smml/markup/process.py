@@ -158,13 +158,17 @@ def interpret_note(i, j, data, options, container):
     if data == '':
         return(i, j, []) # an empty list in the node just gets skipped
 
+    voice = re.search('<voice type=[\"\'][a-z]+[\"\']>', data)
+    if voice is not None:
+        container.append(voice[0])
+
     # extract the note and tag data
     tag_start = data.find('<note')
     tag = data[tag_start:]
     tag = tag[:tag.find('>') + 1]
     note = data[tag_start + len(tag):] # note that ungrouped data is dropped
 
-    # try to extract the data as full JSON, esle use shorthand                  # needs display upgrade
+    # try to extract the data as full JSON, else use shorthand                  # needs display upgrade
     note_data = re.search('\{.*\}', tag)
     if note_data is not None:
         note_data = json.loads(new_options)
@@ -183,16 +187,19 @@ def interpret_note(i, j, data, options, container):
     else:
         num, denom = int(beat), 1
 
+    container.append(note)
     # checking that format is as expected
     if re.fullmatch('[A-G][0-9][+|-]*', pitch) is None:
-        print('Error: Invalid Pitch Detected: {}'.format(pitch))
-        return(i, j, [])
+        if pitch != 'N/A':
+            print('Error: Invalid Pitch Detected: {}'.format(pitch))
+        return(i, j, []) # if rest or if error, note is skipped
 
     if re.fullmatch('[0-9]+(/[0-9]+)?', beat) is None:
         print('Error: Invalid Beat Detected: {}'.format(beat))
         return(i, j, [])
 
-    if num/denom > float(options['time'].split('/')[0]):
+    max_beat = float(options['time'].split('/')[0]) + 1 # +1 shows next measure
+    if num/denom >= max_beat:
         print('Error: Beat Value Too Large: {}'.format(beat))
         return(i, j, [])
 
@@ -212,14 +219,22 @@ def interpret_note(i, j, data, options, container):
     # figure out the "node" of the note
     if num/denom < j:
         i[0] += 1 # next measure
-        container.append(options.copy()) # write options to container --
-                                         # to recognize new measure
+        if i[0] > i[1]: # exceeded measure bound -- loop back to beginning
+            number = options['number']
+            if number == 'auto':
+                i = [i[1], i[1]]
+            elif number.isdigit():
+                i = [int(number), int(number)]
+            else:
+                i = [int(x) for x in number.split(':')]
+        else:
+            container.append(options.copy())    # write options to container --
+                                                # to recognize new measure
 
     j = num/denom
 
     node = '{}.{}'.format(i[0], beat)
 
-    container.append(note)
     return(i, j, [node, pitch])
 
 # Cleans up the program output -- relevant to player and displayer
@@ -227,19 +242,33 @@ def cleanup(nodes):
     cleaned_nodes = []
 
     # start by concatenating all lists starting with a certain node
-    node = [None, 0]
-    for i, item in enumerate(nodes):
+    i = 0
+    while i < len(nodes):
+        item = nodes[i]
+
         # we only operate on nonempty lists
         if type(item) is list:
             if len(item) > 0:
-                # positive match -- concatenate and clear duplicate
-                if item[0] == node[0]:
-                    item.pop(0)
-                    nodes[node[1]] += item
-                    nodes[i] = []
-                # negative match -- tell the computer we've a new node
-                else:
-                    node = [item[0], i]
+                node = item[0]
+
+                j = i + 1
+                while j < len(nodes):
+                    item = nodes[j]
+                    # if item is not a nonempty list, don't try to operate
+                    if type(item) is not list or len(item) == 0:
+                        pass
+                    # positive match -- concatenate and clear duplicate
+                    elif item[0] == node:
+                        item.pop(0)
+                        nodes[i] += item
+                        nodes[j] = []
+                    # do nothing for a negative match -- this allows the program
+                    # to detect nodes that appear again in a different voice
+                    else:
+                        pass
+                    j += 1
+
+        i += 1
 
     # then, loop over the object to recursively clean it up
     for i, item in enumerate(nodes):
@@ -253,9 +282,9 @@ def cleanup(nodes):
 
     return(cleaned_nodes)
 
-def smmlprocess(text, mode='player'):
+def process(text, mode='player'):
     """
-    smmlprocess(text, mode='player')
+    process(text, mode='player')
 
     Reads a machine-formatted smml string (see smml.markup.read) and processes
     the SMML-encoded data to a serialized JSON object. Provides output in one

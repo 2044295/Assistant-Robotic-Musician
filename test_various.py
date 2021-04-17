@@ -3,11 +3,9 @@
 import json, curses, os
 import smml
 
-"""
-with open('samples/sampleSMML.html', 'r') as myfile:
-    text = smml.markup.read(myfile.read())
-    print(json.dumps(smml.markup.smmlprocess(text, 'display'), indent=2))
-"""
+with open('samples/Sample2_FrereJacqueRound.html', 'r') as myfile:
+    text = ''.join([x.strip() for x in myfile.readlines()])
+    print(json.dumps(smml.markup.process(text), indent=2))
 
 """
 # Testing the getPitch functions
@@ -26,6 +24,7 @@ for freq in frequencies:
     print()
 """
 
+"""
 # Testing KeyboardInterrupt to end the audio loop
 def callback(x):
     raise KeyboardInterrupt
@@ -83,9 +82,10 @@ finally:
     curses.endwin()
     print(state)
 
-"""
+\"""
 options = {'type': 'file', 'file': name, 'sample_rate': 1000} # erroneous rate
 def callback(x):
     pass
 print(smml.audiofunc.audioSetup(callback, options)) # confirm that error throws
+\"""
 """
