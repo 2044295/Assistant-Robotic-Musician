@@ -70,7 +70,7 @@ def track(text, callback, a4=440, args=default_options):
         when the audio loop completes successfully.
     """
     # Processing given smml
-    data = markup.read(text)
+    data = ''.join([x.strip() for x in text.split('\n')])
     nodes = markup.smmlprocess(data)[0]
 
     # Preparing the audio loop

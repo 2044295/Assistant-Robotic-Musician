@@ -22,6 +22,12 @@ smml/                 # The main smml package
   track.py            # Putting it all together into a single function
 ```
 
+##### Requirements
+- Standard packages: `re`, `json`, `os`
+- PyPI Packages: `wave`, `pyaudio`, `numpy`, ~~`wavebender`~~
+- <https://zach.se/generate-audio-with-python/>
+- <https://packaging.python.org/tutorials/managing-dependencies/>
+
 ##### Top: `__init__.py`
 - Imports the following: `audiofunc`, `markup`, `nodeio`, and `track`
 - Initializes the package and makes all contained functions available for use

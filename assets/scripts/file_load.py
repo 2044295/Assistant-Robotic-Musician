@@ -5,5 +5,5 @@ import smml
 
 filename = sys.argv[1]
 with open(filename, 'r') as myfile:
-    text = smml.markup.read(myfile.read())
-    smml.nodeio.output(smml.markup.smmlprocess(text, 'display'))
+    text = ''.join([x.strip() for x in myfile.read().split('\n')])
+    smml.nodeio.output(smml.markup.process(text, 'display'))
