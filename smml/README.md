@@ -24,8 +24,8 @@ smml/                 # The main smml package
 
 ##### Requirements
 - Standard packages: `re`, `json`, `os`
-- PyPI Packages: `wave`, `pyaudio`, `numpy`, ~~`wavebender`~~
-- <https://zach.se/generate-audio-with-python/>
+- PyPI Packages: `wave`, `pyaudio`, `numpy`, `chippy`
+- <https://github.com/benmoran56/chippy>
 - <https://packaging.python.org/tutorials/managing-dependencies/>
 
 ##### Top: `__init__.py`
