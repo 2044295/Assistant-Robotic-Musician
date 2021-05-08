@@ -18,6 +18,7 @@ smml/                 # The main smml package
   markup/             # Subpackage for handling reading and writing SMML
     __init__.py         # Initializes the subpackage
     process.py          # Process an SMML string to time-pitch nodes
+    playback.py
   nodeio.py           # Methods handling NodeJS I/O
   track.py            # Putting it all together into a single function
 ```
@@ -165,10 +166,10 @@ Returns the extract frequency and estimated volume.
 ```
 process(text, mode='player')
 
-Reads a machine-formatted smml string and processes the SMML-encoded data to a
-serialized JSON object. Provides output in one of two `modes`: 'player' or
-'display'. Recommended to manually strip newlines and whitespace from an smml
-string before calling `process`.
+Reads a machine-formatted smml string and processes the SMML-encoded data to
+a serialized JSON object. Provides output in one of two `modes`: 'player' or
+'display'. Recommended to manually strip newlines and whitespace from an
+smml string before calling `process`.
 
 'Player' output returns a JSON list of "nodes" that describes the expected
 pitch(es) at each such "node," a numerical marker of a certain position in

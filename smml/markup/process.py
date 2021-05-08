@@ -286,9 +286,10 @@ def process(text, mode='player'):
     """
     process(text, mode='player')
 
-    Reads a machine-formatted smml string (see smml.markup.read) and processes
-    the SMML-encoded data to a serialized JSON object. Provides output in one
-    of two `modes`: 'player' or 'display'.
+    Reads a machine-formatted smml string and processes the SMML-encoded data to
+    a serialized JSON object. Provides output in one of two `modes`: 'player' or
+    'display'. Recommended to manually strip newlines and whitespace from an
+    smml string before calling `process`.
 
     'Player' output returns a JSON list of "nodes" that describes the expected
     pitch(es) at each such "node," a numerical marker of a certain position in
@@ -301,6 +302,7 @@ def process(text, mode='player'):
     'Display' output returns a JSON object with all information necessary to
     generate an HTML-based sheet music display. This mode is currently
     underdeveloped.
+
     """
 
     if mode not in ['player', 'display']:
