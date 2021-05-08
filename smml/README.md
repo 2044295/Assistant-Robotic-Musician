@@ -26,7 +26,7 @@ smml/                 # The main smml package
 ##### Requirements
 - Standard packages: `re`, `json`, `os`
 - PyPI Packages: `wave`, `pyaudio`, `numpy`, `chippy`
-- <https://github.com/benmoran56/chippy>
+- Uses pipenv to manage dependencies; be sure to run `pipenv install --system`
 - <https://packaging.python.org/tutorials/managing-dependencies/>
 
 ##### Top: `__init__.py`

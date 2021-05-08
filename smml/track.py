@@ -23,13 +23,12 @@ def track(text, callback, a4=440, args=default_options):
     The function that puts it all together.
 
     Given "text," a string of HTML/SMML, processes that text to a tree of nodes
-    (smml.markup.read and smml.markup.smmlprocess). Then creates an
-    audio-listening loop (smml.audiofunc.audioSetup) with the options specified
-    in "args." The audio loop callback processes the waveform to a frequency
-    and a pitch around a4 and compares that frequency to the node tree,
-    determining when the next node in a piece is reached. At this moment, the
-    node identifier, as well as the detected pitch, are passed to the specified
-    "callback."
+    (smml.markup.process). Then creates an audio-listening loop
+    (smml.audiofunc.audioSetup) with the options specified in "args." The audio
+    loop callback processes the waveform to a frequency and a pitch around a4
+    and compares that frequency to the node tree, determining when the next node
+    in a piece is reached. At this moment, the node identifier, as well as the
+    detected pitch, are passed to the specified "callback."
 
     Note that "track" operates only on the first SMML fragment detected in
     "text," so if multiple "music" tags appear in an HTML file, the parent
@@ -71,7 +70,7 @@ def track(text, callback, a4=440, args=default_options):
     """
     # Processing given smml
     data = ''.join([x.strip() for x in text.split('\n')])
-    nodes = markup.smmlprocess(data)[0]
+    nodes = markup.process(data)[0]
 
     # Preparing the audio loop
     frame = 0
