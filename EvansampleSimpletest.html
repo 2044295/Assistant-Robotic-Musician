@@ -60,6 +60,8 @@ function jsfull(jsmusobj) {
     var jsthingfunc = function jsthing() {
         for (i in jsarr) {
           if (typeof(jsarr[i]) == "object") {
+            var note = jsarr[parseInt(i)+1];
+            console.log(note);
             var system = makeSystem(400);
             var staveadd = system.addStave({
               voices: [score.voice(score.notes('C5/q, C4, G4, D5'))]

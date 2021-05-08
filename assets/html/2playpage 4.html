@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
+<style>
+body {
+  background-color: #dedede;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.topnav {
+  background-color: gray;
+  overflow: hidden;
+}
+
+.navbar {
+  background-color: #dedede;
+  overflow: hidden;
+  margin-left: 37.5%;
+}
+
+.topnav a, button {
+  float: left;
+  color: white;
+  border: none;
+  background: inherit;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.navbar a, button {
+  float: left;
+  color: black;
+  border: none;
+  background: inherit;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 16px;
+}
+.topnav a:hover, button:hover {
+  background-color: #999999;
+  color: black;
+}
+
+.topnav a.active, button:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.navbar a:hover, button:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.navbar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown2 {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown2 .dropbtn2 {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: black;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.topnav a:hover, button:hover, .dropdown:hover .dropbtn {
+  background-color: #c4c4c4;
+}
+
+.navbar a:hover, button:hover, .dropdown2:hover .dropbtn2 {
+  background-color: grey;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a, button {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover, button:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown2:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-menu {
+  position: relative;
+}
+
+.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+}
+
+.sidenav {
+  width: 130px;
+  padding-top: 10px;
+  z-index: 1;
+  margin-top: 70px;
+  left: 10;
+  background-color: #c4c4c4;
+  overflow-x: hidden;
+}
+
+
+.sidenav ul {
+  padding: 10px 10px 10px 10px;
+  text-decoration: none;
+  font-size: 17px;
+  color: black;
+  display: block;
+}
+
+
+.sidenav a:hover, button:hover {
+  color: #c4c4c4;
+}
+
+.sheetmusic {
+  position:relative;
+  margin-left: 10%;
+  margin-top: 1%;
+  background-color: white;
+  width: 87.5%;
+  height: 0px;
+  padding-bottom: 45%;
+}
+
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <button onclick="goHome()">Home</button>
+  <div class="dropdown">
+    <button class="dropbtn">File</button>
+    <div class="dropdown-content">
+      <a>Save</a>
+      <a>Save As</a>
+      <a>Duplicate</a>
+      <a>Export as File</a>
+      <a>Export as Audio</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">Edit
+    </button>
+    <div class="dropdown-content">
+      <a>Undo</a>
+      <a>Redo</a>
+      <a>Select</a>
+      <a>Find</a>
+      <a>Copy</a>
+      <a>Cut</a>
+      <a>Paste</a>
+      <a>Delete</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">View
+    </button>
+    <div class="dropdown-content">
+      <a>Zoom</a>
+      <a>Page Margins</a>
+      <a>Select</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">Calibrate
+    </button>
+  </div>
+</div>
+
+<br />
+<br />
+
+<div class="navbar">
+  <div class="dropdown2">
+    <button class="dropbtn2">Playback Controls
+    </button>
+    <div class="dropdown-content">
+      <a>Play</a>
+      <a>Pause</a>
+      <a>Go to Measure</a>
+      <a>Go to Section</a>
+      <a>Advanced Controls</a>
+    </div>
+  </div>
+  <div class="dropdown2">
+    <button class="dropbtn2">Performance Controls
+    </button>
+    <div class="dropdown-content">
+      <button onclick="loadFile('samples/sampleSimple.html')">Load File</button>
+      <a>Start Performance</a>
+      <a>Pause Performance</a>
+      <a>Stop Performance</a>
+    </div>
+  </div>
+  <a href="/assets/html/1editpage.html">Return to Edit</a>
+</div>
+
+<div class="sheetmusic" id="sheetmusic">
+    <!--iframe style="position:absolute; left:0; top:0; width:100%; height:100%"
+        src="/assets/html/PlayMeasure.html">
+    </iframe-->
+</div>
+<script src="../scripts/index.js"></script>
+<script>
+
+function jsfull(jsmusobj) {
+  var musparsed = JSON.parse(jsmusobj);
+  divarray = [];
+  var jsfunc = function jsmeasure(count, idname, displaytype) {
+    g = document.createElement('div');
+    g.id = (idname);
+    document.body.appendChild(g);
+    document.getElementById(idname).style.display = displaytype;
+    var vf = new Vex.Flow.Factory({renderer: {elementId: idname, width: 1700, height: 100}});
+    var score = vf.EasyScore();
+    var x = 10;
+    var y = 0;
+    function makeSystem(width) {
+      var system = vf.System({ x: x, y: y, width: width,});
+      x += width;
+      return system;};
+    divarray.push(g);
+    var jsarr = musparsed[0];
+    var jsthingfunc = function jsthing() {
+        for (i in jsarr) {
+          if (typeof(jsarr[i]) == "object") {
+            var system = makeSystem(400);
+            var staveadd = system.addStave({
+              voices: [score.voice(score.notes('C5/q, C4, G4, D5'))]
+            }).addClef("treble").addKeySignature(jsarr[i].key).addTimeSignature(jsarr[i].time);
+            vf.draw();
+            count += 1;
+            var pagenum = count/4;
+            delete jsarr[i];
+            if (pagenum === 1) {
+              jsfunc(4, "boo2", 'none');
+              break;
+            }
+      };
+    };
+    };
+    jsthingfunc();
+  };
+  jsfunc(0, "boo", 'block');
+}
+
+function nextpage(array) {
+  for (i in array) {
+    if (array[i].style.display != "none") {
+      var pagecount = parseInt(i) + 1;
+      array[i].style.display = "none";
+      array[pagecount].style.display = "block";
+      break;
+    }
+  }
+}
+
+let jsobj;
+trackFile('samples/sampleSimple.html');
+ipcRenderer.on('data', (event, arg) => {
+  jsobj = arg;
+  jsfull(jsobj);     // demonstrates presence of arg
+});
+ipcRenderer.on('new_node', (event, arg) => {
+  var jsval = arg[0];
+  var valarr = jsval.split(".");
+  var varint = parseInt(valarr);
+  var pageint = Math.floor(varint);
+  function nextpage(intfoo, array) {
+    for (i in array) {
+      if (parseInt(i) != intfoo) {
+        array[i].style.display = "none";
+      }
+    }
+    array[pageint].style.display = "block";
+  }    // demonstrates presence of arg
+});
+</script>
+
+</body>
+</html>

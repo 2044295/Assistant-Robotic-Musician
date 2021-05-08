@@ -1,0 +1,160 @@
+<head>
+</head>
+
+<body onload = "jsfull(musobj)">
+
+<button onclick = "nextpage(pagearray)">Next Page</button>
+
+<script src="https://unpkg.com/vexflow/releases/vexflow-debug.js"></script>
+
+<script>
+
+
+var musobj = "[[\"<!DOCTYPE html><body>\",\
+      \"<section>\",\
+      \"<!--now with some notes (default C Major, 4/4)-->\",\
+      \"<measure>\",\
+      {\"time\": \"4/4\", \"meter\": \"simple\", \"key\": \"C\", \"number\": \"auto\", \"grouping\": \"n/a\", \"other\": {\"placement\": \"-X-\"}},\
+      \"C4, 1, 1\",\
+      \"E4, 2, 1\",\
+      \"G4, 3, 0.5\",\
+      \"G4, 3.5, 0.5\",\
+      \"C5, 4, 1\",\
+      \"<!--now the same arpeggio, changing to D Major-->\",\
+      \"<measure options=\'{\\\"key\\\": \\\"D\\\"}\'>\",\
+      {\"time\": \"4/4\", \"meter\": \"simple\", \"key\": \"D\", \"number\": \"auto\", \"grouping\": \"n/a\", \"other\": {\"placement\": \"-X-\"}},\
+      \"D4, 1, 1\",\
+      \"F4+, 2, 1\",\
+      \"A4, 3, 1\",\
+      \"D5, 4, 1\",\
+      \"<!--now with two measures of 3/4, changing to D Major-->\",\
+      \"<measure options='{\\\"time\\\": \\\"3/4\\\", \\\"number\\\": \\\"3:5\\\"}'>\",\
+      {\"time\": \"3/4\", \"meter\": \"simple\", \"key\": \"D\", \"number\": \"3:5\", \"grouping\": \"n/a\", \"other\": {\"placement\": \"-X-\"}},\
+      \"D5, 1, 1\",\
+      \"C5+, 2, 1\",\
+      \"B5, 3, 1\",\
+      {\"time\": \"3/4\", \"meter\": \"simple\", \"key\": \"D\", \"number\": \"3:5\", \"grouping\": \"n/a\", \"other\": {\"placement\": \"-X-\"}},\
+      \"A4, 1, 1\",\
+      \"B4, 2, 1\",\
+      \"C5+, 3, 1\",\
+      {\"time\": \"4/4\", \"meter\": \"simple\", \"key\": \"D\", \"number\": \"3:5\", \"grouping\": \"n/a\", \"other\": {\"placement\": \"-X-\"}},\
+      \"D5, 1, 4\"]]";
+
+function jsfull(jsmusobj) {
+  var musparsed = JSON.parse(jsmusobj);
+  divarray = [];
+  pagearray = [];
+  var jsfunc = function jsmeasure(count, idname, displaytype) {
+    g = document.createElement('div');
+    g.id = (idname);
+    document.body.appendChild(g);
+    document.getElementById(idname).style.display = displaytype;
+    var scrwidth = screen.width;
+    var vf = new Vex.Flow.Factory({renderer: {elementId: idname, width: scrwidth, height: 100}});
+    var score = vf.EasyScore();
+    var x = 10;
+    var y = 0;
+    function makeSystem(width) {
+      var system = vf.System({ x: x, y: y, width: width,});
+      x += width;
+      return system;};
+    divarray.push(g);
+    console.log(pagearray);
+    var jsarr = musparsed[0];
+    var jsthingfunc = function jsthing() {
+        for (i in jsarr) {
+          if (typeof(jsarr[i]) == "object") {
+            bar = 1;
+            var notearr = [];
+            var totlength = 0;
+            console.log(parseInt(jsarr[i].time));
+            while (typeof(jsarr[parseInt(i)+bar]) == "string" && jsarr[parseInt(i)+bar].charAt(0) != "<") {
+            var note = jsarr[parseInt(i)+bar];
+            var notesplit = note.split(", ");
+            if (notesplit[0].charAt(2) == "+" || notesplit[0].charAt(2) == "-") {
+              var accid = notesplit[0].charAt(2);
+              notesplit[0]=notesplit[0].replace(accid, '');
+              if (accid == "+") {
+                accid = "#";
+              }
+              else if (accid == "-") {
+                accid = "b";
+              }
+              var ns1 = notesplit[0].slice(0, 1);
+              var ns2 = notesplit[0].slice(1, 2);
+              notesplit[0] = ns1 + accid + ns2;
+            }
+            var noteleng = notesplit[2];
+            var nladd = '';
+            if (noteleng == '0.125') {
+              nladd += '/32';
+            }
+            else if (noteleng == '0.25') {
+              nladd += '/16';
+            }
+            else if (noteleng == '0.5') {
+              nladd += '/8';
+            }
+            else if (noteleng == '1') {
+              nladd += '/q';
+            }
+            else if (noteleng == '2') {
+              nladd += '/h';
+            }
+            else if (noteleng == '4') {
+              nladd += '/w';
+            }
+            notesplit[0] = notesplit[0].concat(nladd);
+            console.log(notesplit);
+            bar += 1;
+            notearr.push(notesplit[0]);
+            totlength += noteleng;
+          }
+            console.log(notearr);
+            console.log(totlength);
+            var system = makeSystem((scrwidth-100)/4);
+            score.set({time: jsarr[i].time});
+            var staveadd = system.addStave({
+              voices: [score.voice(score.notes(notearr.toString()))]
+            }).addClef("treble").addKeySignature(jsarr[i].key).addTimeSignature(jsarr[i].time);
+            vf.draw();
+            count += 1;
+            var linenum = count/4;
+            delete jsarr[i];
+            if (linenum === 1) {
+              var lineboo = "boo" + linenum.toString();
+              jsfunc(4, lineboo, 'block');
+              break;
+            }
+            var pagenum = count/16;
+            p = document.createElement('div');
+            p.class = "container";
+            p.id = "page" + pagenum.toString();
+            console.log(p.id);
+            if (pagenum === 1) {
+              var pageboo = "boop" + pagenum.toString();
+              jsfunc(4, lineboo, 'block');
+              break;
+            }
+      };
+    };
+    };
+    jsthingfunc();
+  };
+  jsfunc(0, "boo", 'block');
+}
+
+function nextpage(array) {
+  for (i in array) {
+    if (array[i].style.display != "none") {
+      var pagecount = parseInt(i) + 1;
+      array[i].style.display = "none";
+      array[pagecount].style.display = "block";
+      break;
+    }
+  }
+}
+</script>
+
+
+</body>
