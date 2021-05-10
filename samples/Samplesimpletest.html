@@ -53,6 +53,7 @@ function jsfull(jsmusobj) {
         p.id = "page" + count/16;
         document.body.appendChild(p);
         pagearray.push(p);
+        document.getElementById("page" + count/16).style.display = "block";
       }
     }
     pagefunc(count);
@@ -84,7 +85,6 @@ function jsfull(jsmusobj) {
             var notesplit = note.split(", ");
             if (notesplit[0].charAt(2) == "+" || notesplit[0].charAt(2) == "-") {
               var accid = notesplit[0].charAt(2);
-              notesplit[0]=notesplit[0].replace(accid, '');
               if (accid == "+") {
                 accid = "#";
               }
@@ -120,6 +120,19 @@ function jsfull(jsmusobj) {
             notearr.push(notesplit[0]);
             totlength += parseFloat(noteleng);
           }
+          if (jsarr[i].key.charAt(1) == "+" || jsarr[i].key.charAt(1) == "-") {
+            var keyaccid = jsarr[i].key.charAt(1);
+            if (keyaccid == "+") {
+              keyaccid = "#";
+            }
+            else if (keyaccid == "-") {
+              keyaccid = "b";
+            }
+            var ks1 = jsarr[i].key.slice(0, 1);
+            var ks2 = jsarr[i].key.slice(2, 3);
+            console.log(ks1 + keyaccid);
+            jsarr[i].key = ks1 + keyaccid + ks2;
+          }
             var pagenum = count/16;
             var system = makeSystem((scrwidth-100)/4);
             score.set({time: jsarr[i].time});
@@ -141,7 +154,18 @@ function jsfull(jsmusobj) {
     jsthingfunc();
   };
   jsfunc(0, "boo", 'block');
+  for (i in pagearray) {
+    if (pagearray[i].style.display != "none") {
+      for (x in pagearray) {
+        if (x != i) {
+          pagearray[x].style.display = "none";
+        }
+      }
+    }
+  }
 }
+
+
 
 function nextpage(array) {
   for (i in array) {
