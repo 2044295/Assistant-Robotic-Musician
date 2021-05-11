@@ -22,12 +22,20 @@ function createWindow () {
     let options = {args: [filename], mode: 'json'}
     let pyshell = new PythonShell('./assets/scripts/file_load.py', options);
     pyshell.on('message', (message) => {
+      console.log(message);
       win.webContents.send('data', message);
     });
   });
   ipcMain.on('trackFile', (event, filename) => {                                // lacks any error handling
     let options = {args: [filename], mode: 'json'}
     let pyshell = new PythonShell('./assets/scripts/file_track.py', options);
+    pyshell.on('message', (message) => {
+      win.webContents.send('new_node', message);
+    });
+  });
+  ipcMain.on('testFile', (event, filename) => {                                 // lacks any error handling
+    let options = {args: [filename], mode: 'json'}
+    let pyshell = new PythonShell('./assets/scripts/file_test.py', options);
     pyshell.on('message', (message) => {
       win.webContents.send('new_node', message);
     });
