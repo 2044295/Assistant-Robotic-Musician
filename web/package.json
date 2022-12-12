@@ -24,7 +24,7 @@
   },
   "homepage": "https://evankeeton.herokuapp.com/",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "ls": "file:Private/ls",
     "respond": "file:Private/respond"
   },
