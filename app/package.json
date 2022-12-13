@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/2044295/Assistant-Robotic-Musician#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "file-system": "^2.2.2",
     "path": "^0.12.7",
     "python-shell": "^2.0.2"
